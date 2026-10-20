@@ -74,6 +74,7 @@ textarea{font-family:var(--f-verse);font-size:1.05rem;min-height:110px;resize:ve
 .card .vref{font-family:var(--f-ui);font-weight:600;color:var(--gilt);letter-spacing:.06em;text-transform:uppercase;font-size:.78rem;margin-bottom:10px}
 .verse{font-family:var(--f-verse);font-size:1.32rem;line-height:1.75;word-wrap:break-word}
 .w{display:inline;border-radius:3px}
+.vn{font-family:var(--f-ui);font-size:.6em;font-weight:600;color:var(--gilt);vertical-align:super;line-height:0;margin-right:.25em;user-select:none;font-variant-numeric:tabular-nums}
 .w.hid{color:transparent;border-bottom:2px solid var(--line);cursor:pointer;user-select:none}
 .w.hid:hover{border-bottom-color:var(--accent)}
 .w .rest{color:transparent;border-bottom:2px solid var(--line)}
@@ -116,6 +117,84 @@ select#bk{flex:1;min-width:150px}
 .hit .acts{grid-row:1/3;grid-column:2;display:flex;gap:6px}
 details.manual{margin-top:26px}
 details.manual summary{cursor:pointer;color:var(--muted);font-weight:600;margin-bottom:10px}
+/* Leitner-doos */
+.doos{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px}
+.vak{display:flex;flex-direction:column;align-items:flex-start;gap:1px;padding:10px 10px 9px;text-align:left;border-radius:10px;min-width:0}
+.vak .vk{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600}
+.vak .vc{font-family:var(--f-verse);font-size:1.6rem;line-height:1.15;font-variant-numeric:tabular-nums}
+.vak .vi{font-size:.7rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.vak .vbar{display:block;width:100%;height:4px;background:var(--line);border-radius:2px;margin-top:7px;overflow:hidden}
+.vak .vbar i{display:block;height:100%;background:var(--accent);border-radius:2px}
+.vak.lang .vk{color:var(--gilt)}
+.vak.lang .vbar i{background:var(--gilt)}
+.vak[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.chip{display:inline-block;font-family:var(--f-ui);font-size:.7rem;font-weight:600;border-radius:999px;padding:1px 8px;background:var(--accent-soft);color:var(--accent);margin-left:8px;vertical-align:1px;white-space:nowrap}
+.chip.lang{background:color-mix(in srgb,var(--gilt) 20%,transparent);color:var(--gilt)}
+.listhead{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+details.uitleg{margin-top:12px;font-size:.92rem}
+details.uitleg summary{cursor:pointer;color:var(--accent);font-weight:600}
+details.uitleg ul{margin:8px 0 0;padding-left:1.2em;max-width:65ch;display:grid;gap:4px}
+.mode{display:flex;gap:10px;align-items:flex-start;margin:14px 0 0;padding:10px 12px;border-radius:10px;background:var(--accent-soft);font-size:.9rem;line-height:1.45}
+.mode .chip{margin-left:0;flex:none;background:var(--surface)}
+.methods{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.methods button{border:0;border-radius:0;padding:6px 16px}
+.methods button[aria-pressed="true"]{background:var(--accent);color:var(--surface);font-weight:600}
+.hiddenhint{color:var(--muted);font-style:italic;font-size:1rem}
+.verdict{margin-top:14px;padding:14px 16px;border-radius:10px;border:1px solid var(--line);line-height:1.55}
+.verdict.ok{border-color:var(--good);background:color-mix(in srgb,var(--good) 10%,var(--surface))}
+.verdict.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface))}
+.verdict strong{color:var(--fg)}
+.linkish{background:none;border:0;padding:0;color:var(--accent);text-decoration:underline;margin-top:6px}
+fieldset{border:0;padding:0;margin:0;display:grid;gap:6px}
+.opt{display:flex;gap:8px;align-items:center;cursor:pointer}
+.opt input{accent-color:var(--accent)}
+.ivals{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.ivals b{color:var(--fg);font-weight:600}
+@media (max-width:560px){.doos{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Lange gedeelten, stappen, voorlezen */
+.verse .seg{margin:0 0 .55em;padding:2px 6px;margin-left:-6px;margin-right:-6px;border-radius:6px;transition:background .2s}
+.verse .seg:last-child{margin-bottom:0}
+.verse .seg.speaking{background:var(--accent-soft)}
+.steps{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 4px}
+.stp{font-size:.82rem;padding:5px 11px;border-radius:999px}
+.stp.ok{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,var(--line))}
+.stp[aria-current="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:600}
+.segcheck{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:8px 0;border-bottom:1px solid var(--line)}
+.segcheck:last-child{border-bottom:0}
+.segcheck .seg{margin:0}
+.tog{font-size:.8rem;padding:4px 10px;min-width:5.6em;margin-top:.3em}
+.tog.good{border-color:color-mix(in srgb,var(--good) 50%,var(--line));color:var(--good)}
+.tog.bad{border-color:var(--bad);color:var(--bad);background:color-mix(in srgb,var(--bad) 8%,var(--surface))}
+table.prog{border-collapse:collapse;font-size:.88rem;width:100%;max-width:65ch}
+table.prog th{text-align:left;vertical-align:top;padding:5px 12px 5px 0;white-space:nowrap;font-weight:600}
+table.prog td{padding:5px 0;color:var(--muted)}
+table.prog tr+tr{border-top:1px solid var(--line)}
+/* Getalkeuze */
+.numfield{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.numwrap{display:inline-flex;gap:6px;align-items:center}
+.numwrap input{font:inherit;width:6em;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);color:var(--fg);font-variant-numeric:tabular-nums}
+.note.err{color:var(--bad)}
+/* Spraak en automodus */
+.startbtns{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.heard{color:var(--muted);font-style:italic;margin:0}
+button.big{font-size:1.1rem;padding:14px 22px}
+.car{--c-bg:#0e1412;--c-fg:#eef3f0;--c-mut:#9fb0a8;--c-btn:#1d2724;--c-line:#33413c;--c-acc:#7fb8a5;--c-good:#2f8a57;--c-bad:#b8443d;
+  background:var(--c-bg);color:var(--c-fg);border-radius:16px;padding:18px;margin-top:16px;display:grid;gap:14px;color-scheme:dark}
+.carhead{display:flex;justify-content:space-between;font-size:.8rem;text-transform:uppercase;letter-spacing:.09em;color:var(--c-mut);font-weight:600}
+.cref{font-family:var(--f-verse);font-size:2rem;line-height:1.15;text-wrap:balance}
+.cmsg{font-size:1.35rem;font-weight:600;color:var(--c-acc);min-height:1.6em}
+.cheard{font-family:var(--f-verse);font-style:italic;color:var(--c-mut);font-size:1rem;min-height:1.2em;max-height:6.5em;overflow:hidden}
+.cbig{font:inherit;font-size:1.25rem;font-weight:600;min-height:76px;border-radius:14px;border:1px solid var(--c-line);background:var(--c-btn);color:var(--c-fg);width:100%}
+.cbig:hover{border-color:var(--c-acc)}
+.cbtns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cbtns .cbig{font-size:1.08rem;padding:0 4px}
+.cbtns.one{grid-template-columns:1fr}
+.cjudge{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cjudge .cbig{min-height:120px;font-size:1.6rem}
+.cgood{background:var(--c-good);border-color:var(--c-good);color:#fff}
+.cbad{background:var(--c-bad);border-color:var(--c-bad);color:#fff}
+.cdone{background:var(--c-acc);border-color:var(--c-acc);color:var(--c-bg);min-height:110px;font-size:1.5rem}
+.cstop{font:inherit;background:none;border:0;color:var(--c-mut);text-decoration:underline;padding:6px;justify-self:center}
 @media (max-width:480px){.verse{font-size:1.18rem}.rate .btns{grid-template-columns:repeat(2,1fr)}.row .acts button{padding:6px 10px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -128,7 +207,7 @@ details.manual summary{cursor:pointer;color:var(--muted);font-weight:600;margin-
     <nav aria-label="Weergave">
       <button class="ghost" data-view="home" id="nav-home">Overzicht</button>
       <button class="ghost" data-view="add" id="nav-add">Bijbel</button>
-      <button class="ghost" data-view="data" id="nav-data">Bewaren</button>
+      <button class="ghost" data-view="data" id="nav-data">Instellingen</button>
     </nav>
   </header>
   <main id="app"></main>
@@ -138,7 +217,10 @@ details.manual summary{cursor:pointer;color:var(--muted);font-weight:600;margin-
 
 <script>
 const KEY='woord-in-het-hart-v1';
-const INTERVALS=[0,1,3,7,14,30,60,120]; // dagen per vak
+/* Leitner-doos. Nieuw = wachtrij. Vak 1 t/m 7: na een foutloze toets schuift een tekst één vak op
+   en verdubbelt de wachttijd tot de volgende toets ongeveer. Vak 7 is de lange termijn. */
+const BOX_DAYS=[0,1,2,4,8,16,32,90];
+const DEF_SETTINGS={perDay:3,fail:'klassiek',method:'typen',segPerDay:4,rate:0.85,echo:1};
 const SAMPLE=[
  ['Psalm 23:1','Een psalm van David. De HEERE is mijn Herder, mij zal niets ontbreken.'],
  ['Johannes 3:16','Want alzo lief heeft God de wereld gehad, dat Hij Zijn eniggeboren Zoon gegeven heeft, opdat een iegelijk die in Hem gelooft, niet verderve, maar het eeuwige leven hebbe.'],
@@ -148,43 +230,89 @@ const SAMPLE=[
 ];
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const addDays=(s,n)=>{const [y,m,d]=s.split('-').map(Number);const x=new Date(y,m-1,d+n);return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')};
+const dayDiff=(a,b)=>{const p=s=>{const [y,m,d]=s.split('-').map(Number);return Date.UTC(y,m-1,d)};return Math.round((p(b)-p(a))/864e5)};
+const relDay=d=>{const n=dayDiff(today(),d);return n<=0?'vandaag':n===1?'morgen':'over '+n+' dagen'};
+const fmtDate=d=>{const [y,m,dd]=d.split('-').map(Number);return new Date(y,m-1,dd).toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'})};
 const uid=()=>Math.random().toString(36).slice(2,10);
 const norm=w=>w.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]/g,'');
 const words=t=>t.trim().split(/\s+/).filter(Boolean);
-const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-let state=load();
-function load(){
-  try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.verses))return s}catch(e){}
-  return {verses:SAMPLE.map(([ref,text])=>({id:uid(),ref,text,box:0,due:today(),reps:0,example:true}))};
+/* Opslag + omzetten van de oude indeling (versie 1) naar de Leitner-doos */
+function migrate(s){
+  if(!s||!Array.isArray(s.verses))return null;
+  if(s.v!==2){
+    s.verses=s.verses.map(v=>{const n={...v};
+      n.box=(v.reps|0)>0?Math.min(7,Math.max(1,v.box|0)):0;
+      delete n.reps;return n});
+    s.v=2;
+  }
+  s.verses=s.verses.filter(v=>v&&v.ref&&v.text).map(v=>({...v,id:v.id||uid(),box:Math.min(7,Math.max(0,v.box|0)),due:v.due||today()}));
+  s.settings={...DEF_SETTINGS,...(s.settings||{})};
+  s.log=s.log&&typeof s.log==='object'?s.log:{};
+  return s;
 }
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function toast(m){const t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,1800)}
+function save(s=state){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+function load(){
+  try{const s=migrate(JSON.parse(localStorage.getItem(KEY)));if(s){save(s);return s}}catch(e){}
+  return migrate({v:2,verses:SAMPLE.map(([ref,text])=>({id:uid(),ref,text,box:0,due:today(),example:true}))});
+}
+let state=load();
+function todayLog(){const t=today();if(!state.log[t]){state.log[t]={tests:0,ok:0,intro:0};
+  const ks=Object.keys(state.log).sort();while(ks.length>120)delete state.log[ks.shift()]}return state.log[t]}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>t.hidden=true,2200)}
 
 const app=document.getElementById('app');
 let view='home', cur=null, stage=0, queue=[];
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.view));
-function go(v){view=v;document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.view===v));render();window.scrollTo(0,0)}
-function render(){({home:renderHome,add:renderAdd,data:renderData,practice:renderPractice})[view]()}
+function go(v){if(CAR.on&&v!=='car')carEnd();stopTTS();view=v;document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current',b.dataset.view===v));render();window.scrollTo(0,0)}
+function render(){({home:renderHome,add:renderAdd,data:renderData,practice:renderPractice,car:renderCar})[view]()}
 
-function dueList(){const t=today();return state.verses.filter(v=>v.due<=t).sort((a,b)=>a.box-b.box||a.due.localeCompare(b.due))}
-function boxDots(n){let s='<span class="box" title="Vak '+(n+1)+' van 8">';for(let i=0;i<7;i++)s+='<i class="'+(i<n?'on':'')+'"></i>';return s+'</span>'}
-function dueLabel(v){const t=today();if(v.due<=t)return '<span class="due now">vandaag</span>';
-  const d=Math.round((new Date(v.due)-new Date(t))/864e5);return '<span class="due">over '+d+(d===1?' dag':' dagen')+'</span>'}
+/* Wat staat er vandaag op het programma */
+function dueTests(){const t=today();return state.verses.filter(v=>v.box>0&&v.due<=t).sort((a,b)=>a.box-b.box||a.due.localeCompare(b.due))}
+function newToday(){const t=today(),done=(state.log[t]||{}).intro|0;
+  return state.verses.filter(v=>v.box===0&&v.introDay!==t).sort((a,b)=>((b.intro|0)>0)-((a.intro|0)>0)).slice(0,Math.max(0,state.settings.perDay-done))}
+function statusLabel(v,newIds){
+  if(v.box===0){const pr=v.intro?` · ${v.intro} delen ingeprent`:'';return (newIds.has(v.id)?'<span class="due now">vandaag inprenten':v.introDay===today()?'<span class="due">morgen verder':'<span class="due">wachtrij')+pr+'</span>'}
+  return v.due<=today()?'<span class="due now">toets vandaag</span>':`<span class="due">toets ${relDay(v.due)}</span>`;
+}
+const chip=b=>`<span class="chip ${b===7?'lang':''}">${b?'Vak '+b:'Nieuw'}</span>`;
 
+let boxFilter=null;
 function renderHome(){
-  const due=dueList(), newCount=due.filter(v=>v.reps===0).length;
-  let h=`<section class="today"><div><div class="label">Vandaag te herhalen</div>
-    <div class="n">${due.length}</div><div class="note">${newCount?newCount+' nieuw · ':''}${due.length-newCount} herhaling</div></div>
-    <button class="primary" id="start" ${due.length?'':'disabled'}>${due.length?'Begin met oefenen':'Alles gedaan voor vandaag'}</button></section>`;
-  h+=`<h2>Jouw teksten</h2>`;
+  const tests=dueTests(), news=newToday(), total=tests.length+news.length, L=state.log[today()];
+  const newIds=new Set(news.map(v=>v.id));
+  const counts=Array(8).fill(0);state.verses.forEach(v=>counts[v.box]++);
+  const max=Math.max(1,...counts);
+  const nextDue=state.verses.filter(v=>v.box>0&&v.due>today()).map(v=>v.due).sort()[0];
+  const parts=[];if(tests.length)parts.push(tests.length+(tests.length===1?' toets':' toetsen'));if(news.length)parts.push(news.length+' nieuw');
+  let h=`<section class="today"><div><div class="label">Vandaag</div><div class="n">${total}</div>
+    <div class="note">${total?parts.join(' · '):nextDue?'Volgende toets '+relDay(nextDue)+' ('+fmtDate(nextDue)+')':counts[0]&&!state.settings.perDay?'Nieuwe teksten staan op pauze (0 per dag, zie Instellingen)':counts[0]?'Morgen weer nieuwe teksten':'Voeg een tekst toe om te beginnen'}</div>
+    ${L&&(L.tests||L.intro)?`<div class="note">Gedaan: ${L.tests} getoetst, ${L.ok} foutloos${L.intro?', '+L.intro+' ingeprent':''}</div>`:''}</div>
+    <div class="startbtns"><button class="primary" id="start" ${total?'':'disabled'}>${total?'Begin':'Klaar voor vandaag'}</button><button id="carGo">Automodus</button></div></section>`;
+  h+=`<h2>Leitner-doos</h2><div class="doos" role="group" aria-label="Vakken van de Leitner-doos">`+counts.map((c,b)=>
+    `<button class="vak ${b===7?'lang':''}" data-b="${b}" aria-pressed="${boxFilter===b}"><span class="vk">${b?'Vak '+b:'Nieuw'}</span><span class="vc">${c}</span><span class="vi">${b===0?'wachtrij':BOX_DAYS[b]===1?'elke dag':BOX_DAYS[b]+' dagen'}</span><span class="vbar"><i style="width:${Math.round(c/max*100)}%"></i></span></button>`).join('')+`</div>
+  <details class="uitleg"><summary>Hoe werkt de Leitner-doos?</summary><ul>
+    <li>Nieuwe teksten wachten in <b>Nieuw</b>. ${state.settings.perDay?`Elke dag prent je er ${state.settings.perDay} in; daarna gaan ze naar vak 1 en volgt de volgende dag de eerste toets.`:'Het inprenten van nieuwe teksten staat op pauze (0 per dag, zie Instellingen).'}</li>
+    <li>Is de dag van een tekst gekomen, dan wordt hij getoetst: je zegt hem op zonder hulp.</li>
+    <li><b>Foutloos</b>: één vak verder. De wachttijd tot de volgende toets wordt per vak ongeveer twee keer zo lang: 1, 2, 4, 8, 16, 32 dagen.</li>
+    <li><b>Fout</b>: ${state.settings.fail==='mild'?'één vak terug':'terug naar vak 1'} en de volgende dag opnieuw. Zo krijgen lastige teksten vanzelf meer aandacht.</li>
+    <li><b>Vak 7</b> is de lange termijn. Daar blijft een tekst, met elke 90 dagen een onderhoudstoets zodat hij niet wegzakt.</li>
+    <li>Oefenen buiten de toetsdag mag altijd, maar telt niet mee voor de doos.</li></ul>
+    <div class="label" style="margin-top:12px">Oefenprogramma per vak</div>
+    <table class="prog">${PROGRAM().map(([a,b])=>`<tr><th>${a}</th><td>${b}</td></tr>`).join('')}</table></details>`;
+  const list=state.verses.filter(v=>boxFilter===null||v.box===boxFilter);
+  h+=`<div class="listhead"><h2>${boxFilter===null?'Jouw teksten':boxFilter?'Vak '+boxFilter:'Nieuw (wachtrij)'}</h2>${boxFilter!==null?'<button class="ghost" id="all">Toon alles</button>':''}</div>`;
   if(state.verses.some(v=>v.example))h+=`<p class="note">De teksten met “voorbeeld” staan er om de app te proberen. Verwijder ze gerust en voeg je eigen teksten toe.</p>`;
-  h+='<div class="list">'+state.verses.map(v=>`<div class="row"><div class="ref">${esc(v.ref)}${boxDots(v.box)}${dueLabel(v)}${v.example?'<span class="ex">voorbeeld</span>':''}</div>
+  h+='<div class="list">'+list.map(v=>`<div class="row"><div class="ref">${esc(v.ref)}${chip(v.box)}${statusLabel(v,newIds)}${v.example?'<span class="ex">voorbeeld</span>':''}</div>
     <div class="txt">${esc(v.text)}</div>
-    <div class="acts"><button data-p="${v.id}">Oefen</button><button class="ghost" data-e="${v.id}" aria-label="Bewerk ${esc(v.ref)}">Bewerk</button></div></div>`).join('')+'</div>';
-  if(!state.verses.length)h+='<p class="note">Nog geen teksten. Kies “Bijbel” om een tekst toe te voegen.</p>';
+    <div class="acts"><button data-p="${v.id}">${v.box===0?'Inprenten':v.due<=today()?'Toets':'Oefen'}</button><button class="ghost" data-e="${v.id}" aria-label="Bewerk ${esc(v.ref)}">Bewerk</button></div></div>`).join('')+'</div>';
+  if(!list.length)h+=`<p class="note">${state.verses.length?'Dit vak is leeg.':'Nog geen teksten. Kies “Bijbel” om een tekst toe te voegen.'}</p>`;
   app.innerHTML=h;
-  const s=document.getElementById('start');if(s)s.onclick=()=>{queue=due.map(v=>v.id);startNext()};
+  document.getElementById('carGo').onclick=()=>go('car');
+  const s=document.getElementById('start');if(s)s.onclick=()=>{queue=[...tests,...news].map(v=>v.id);startNext()};
+  app.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{const n=+b.dataset.b;boxFilter=boxFilter===n?null:n;renderHome()});
+  const al=document.getElementById('all');if(al)al.onclick=()=>{boxFilter=null;renderHome()};
   app.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{queue=[];openPractice(b.dataset.p)});
   app.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{editId=b.dataset.e;go('add')});
 }
@@ -199,6 +327,7 @@ const bibleReady=(async()=>{
     BIBLE=JSON.parse(txt);
   }catch(e){bibleErr='De bijbeltekst kon niet worden geladen in deze browser. Gebruik een recente versie van Chrome, Edge, Firefox of Safari.'}
   if(view==='add')renderAdd();
+  else if(view==='practice'&&!document.getElementById('recite')&&!document.getElementById('key')){prep();if(!outcome&&plan.steps.every(x=>!x.done))plan=buildPlan();renderPractice()}
 })();
 const bookKey=s=>norm(s.replace(/\s+/g,''));
 function findBook(q){const k=bookKey(q);if(!k)return -1;
@@ -214,7 +343,17 @@ function parseRef(q){
 function refName(b,c,v1,v2){const n=BIBLE[b][0]==='Psalmen'?'Psalm':BIBLE[b][0];return `${n} ${c+1}:${v1}${v2>v1?'-'+v2:''}`}
 function hasRef(r){return state.verses.some(v=>v.ref===r)}
 function addFromBible(b,c,v1,v2){const r=refName(b,c,v1,v2);if(hasRef(r))return false;
-  state.verses.push({id:uid(),ref:r,text:BIBLE[b][1][c].slice(v1-1,v2).join(' '),box:0,due:today(),reps:0});return true}
+  const vs=BIBLE[b][1][c].slice(v1-1,v2);
+  state.verses.push({id:uid(),ref:r,text:vs.join(' '),marks:v2>v1?buildMarks(vs,v1):[],box:0,due:today()});return true}
+function buildMarks(vs,v1){const out=[];let w=0;vs.forEach((t,i)=>{out.push([w,v1+i]);w+=words(t).length});return out}
+/* Versnummers voor gedeelten die al eerder zijn toegevoegd: afleiden uit de vindplaats */
+function marksOf(v){
+  if(Array.isArray(v.marks))return v.marks;
+  if(!BIBLE)return null;
+  const r=/:\d+\s*[-–]\s*\d+$/.test(v.ref)?parseRef(v.ref):null;
+  const vs=r&&r.v2>r.v1?BIBLE[r.b][1][r.c].slice(r.v1-1,r.v2):null;
+  v.marks=vs&&vs.join(' ')===v.text?buildMarks(vs,r.v1):[];save();return v.marks}
+function vnum(at,i){return at[i]!==undefined?`<sup class="vn">${at[i]}</sup>`:''}
 
 let pick={b:42,c:2,s:0,e:0,q:'',hits:null};
 let editId=null;
@@ -292,17 +431,56 @@ function bindManual(v){
   document.getElementById('f').onsubmit=e=>{e.preventDefault();
     const ref=document.getElementById('ref').value.trim(),text=document.getElementById('txt').value.trim().replace(/\s+/g,' ');
     if(!ref||!text)return;
-    if(v){const changed=v.text!==text;Object.assign(v,{ref,text});delete v.example;if(changed){v.box=0;v.due=today();v.reps=0}}
-    else state.verses.push({id:uid(),ref,text,box:0,due:today(),reps:0});
+    if(v){const changed=v.text!==text;Object.assign(v,{ref,text});delete v.example;delete v.marks;if(changed){v.box=0;v.due=today();delete v.intro;delete v.weak;delete v.introDay}}
+    else state.verses.push({id:uid(),ref,text,box:0,due:today()});
     save();editId=null;toast(v?'Opgeslagen':'Toegevoegd');go('home')};
   const cn=document.getElementById('cancel');if(cn)cn.onclick=()=>{editId=null;go('home')};
   const d=document.getElementById('del');if(d){d.onclick=()=>document.getElementById('delq').hidden=false;
     document.getElementById('delyes').onclick=()=>{state.verses=state.verses.filter(x=>x.id!==v.id);save();editId=null;toast('Verwijderd');go('home')}}
 }
 
+/* Keuzelijst met vaste waarden plus een vrij getal van 0 t/m 100 */
+function numField(id,val,presets,zeroNote){
+  const custom=!presets.includes(val);
+  return `<div class="numfield"><select id="${id}" aria-label="Kies een aantal">${presets.map(n=>`<option value="${n}" ${!custom&&n===val?'selected':''}>${n===0?'0 (zie uitleg)':n}</option>`).join('')}<option value="custom" ${custom?'selected':''}>Ander getal…</option></select>
+    <span class="numwrap" id="${id}-w" ${custom?'':'hidden'}><input type="number" id="${id}-n" min="0" max="100" step="1" inputmode="numeric" value="${val}" aria-label="Eigen getal van 0 tot en met 100"><button type="button" id="${id}-ok">Opslaan</button></span><span class="note err" id="${id}-msg" hidden></span></div>
+    <p class="note" style="margin:0">${zeroNote}. Of kies “Ander getal…” voor een eigen waarde van 0 tot en met 100.</p>`;
+}
+function bindNumField(id,set){
+  const sel=document.getElementById(id),w=document.getElementById(id+'-w'),inp=document.getElementById(id+'-n'),msg=document.getElementById(id+'-msg');
+  const commit=n=>{set(n);save();msg.hidden=true;toast('Opgeslagen: '+n)};
+  sel.onchange=()=>{if(sel.value==='custom'){w.hidden=false;inp.focus();inp.select()}else{w.hidden=true;commit(+sel.value)}};
+  const fromInput=()=>{const t=inp.value.trim(),n=Number(t);
+    if(t===''||!Number.isInteger(n)||n<0||n>100){msg.textContent='Vul een heel getal in van 0 tot en met 100.';msg.hidden=false;return}
+    commit(n)};
+  document.getElementById(id+'-ok').onclick=fromInput;
+  inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();fromInput()}};
+}
 function renderData(){
-  const json=JSON.stringify(state,null,1);
-  app.innerHTML=`<h2>Bewaren en overzetten</h2>
+  const S=state.settings, json=JSON.stringify(state,null,1);
+  app.innerHTML=`<h2>Leitner-doos</h2>
+  <form class="add" id="set">
+    <label class="label" for="perDay">Nieuwe teksten per dag</label>
+    ${numField('perDay',S.perDay,[0,1,2,3,4,5,6,7,8,9,10,12,15,20,25,30,40,50],'0 = pauze: er komen geen nieuwe teksten bij')}
+    <p class="note">Liever elke dag een paar teksten goed inprenten dan veel tegelijk. De rest wacht in “Nieuw”.</p>
+    <label class="label" for="segPerDay">Lange gedeelten: delen per dag inprenten</label>
+    ${numField('segPerDay',S.segPerDay,[0,1,2,3,4,5,6,7,8,9,10,12,15,20,25,30,40,50],'0 = alles in één keer, hoe lang het gedeelte ook is')}
+    <p class="note">Een gedeelte wordt opgedeeld per vers (lange verzen bij de leestekens). Is het langer, dan prent je het in porties in over meerdere dagen; elke dag herhaal je eerst wat je al kent.</p>
+    <label class="label" for="rate2">Voorleessnelheid</label>
+    <select id="rate2">${[[0.7,'langzaam'],[0.85,'rustig'],[1,'normaal']].map(([r,l])=>`<option value="${r}" ${S.rate==r?'selected':''}>${l}</option>`).join('')}</select>
+    <label class="label" for="echo3">Pauze bij naspreken en aanvullen</label>
+    <select id="echo3">${[[0.7,'kort'],[1,'normaal'],[1.4,'lang'],[1.8,'heel lang']].map(([r,l])=>`<option value="${r}" ${S.echo==r?'selected':''}>${l}</option>`).join('')}</select>
+    <p class="note">Voorlezen gebruikt de Nederlandse stem van je toestel. Werkt het niet offline? Download dan op Android de Nederlandse stem bij Instellingen → Tekst-naar-spraak.</p>
+    <fieldset><legend class="label">Bij een fout in de toets</legend>
+      <label class="opt"><input type="radio" name="fail" id="fail-k" value="klassiek" ${S.fail!=='mild'?'checked':''}> Terug naar vak 1 (klassiek Leitner, aanbevolen)</label>
+      <label class="opt"><input type="radio" name="fail" id="fail-m" value="mild" ${S.fail==='mild'?'checked':''}> Eén vak terug (milder, handig bij lange gedeelten)</label>
+    </fieldset>
+    <div class="label">Wachttijd na een foutloze toets</div>
+    <div class="ivals">${[1,2,3,4,5,6,7].map(b=>`<span><b>Vak ${b}</b> ${BOX_DAYS[b]} ${BOX_DAYS[b]===1?'dag':'dagen'}</span>`).join('')}</div>
+    <div class="label">Oefenprogramma per vak</div>
+    <table class="prog">${PROGRAM().map(([a,b])=>`<tr><th>${a}</th><td>${b}</td></tr>`).join('')}</table>
+  </form>
+  <h2>Bewaren en overzetten</h2>
   <p class="note">Je teksten en voortgang staan alleen in deze browser op dit apparaat. Kopieer de reservekopie hieronder en bewaar die ergens, of plak hem op een ander apparaat bij “Terugzetten”.</p>
   <form class="add" id="exp"><label class="label" for="out">Reservekopie</label>
     <textarea id="out" readonly>${esc(json)}</textarea>
@@ -312,92 +490,531 @@ function renderData(){
     <textarea id="in" placeholder='{"verses":[...]}'></textarea>
     <div class="formrow"><button type="submit">Vervang mijn teksten hiermee</button></div>
     <p class="note" id="impmsg"></p></form>`;
+  bindNumField('perDay',n=>{S.perDay=n});
+  bindNumField('segPerDay',n=>{S.segPerDay=n});
+  document.getElementById('echo3').onchange=e=>{S.echo=+e.target.value;save();toast('Opgeslagen')};
+  document.getElementById('rate2').onchange=e=>{S.rate=+e.target.value;save();toast('Opgeslagen')};
+  app.querySelectorAll('input[name=fail]').forEach(r=>r.onchange=()=>{S.fail=r.value;save();toast('Opgeslagen')});
   document.getElementById('copy').onclick=()=>{const t=document.getElementById('out');
     navigator.clipboard.writeText(t.value).then(()=>toast('Gekopieerd'),()=>{t.focus();t.select();toast('Geselecteerd: kopieer met Ctrl+C')})};
   document.getElementById('imp').onsubmit=e=>{e.preventDefault();const m=document.getElementById('impmsg');
-    try{const s=JSON.parse(document.getElementById('in').value);if(!Array.isArray(s.verses))throw 0;
-      state={verses:s.verses.filter(v=>v.ref&&v.text).map(v=>({id:v.id||uid(),ref:v.ref,text:v.text,box:v.box|0,due:v.due||today(),reps:v.reps|0}))};
-      save();toast(state.verses.length+' teksten teruggezet');go('home')}
+    try{const s=migrate(JSON.parse(document.getElementById('in').value));if(!s)throw 0;
+      state=s;save();toast(state.verses.length+' teksten teruggezet');go('home')}
     catch(err){m.textContent='Dit is geen geldige reservekopie. Plak de volledige tekst die met { begint.'}};
 }
 
-/* ---------- Oefenen ---------- */
-const STAGES=[
- {name:'Lezen',help:'Lees de tekst een paar keer hardop. Let op de opbouw en de lastige woorden.'},
- {name:'Beginletters',help:'Alleen de eerste letter staat er. Zeg de tekst op; tik op een woord om het te spieken.'},
- {name:'Gaten',help:'Schuif om meer woorden te verbergen. Tik op een gat om het woord te zien.'},
- {name:'Letters typen',help:'Typ van elk woord alleen de eerste letter. Goed = het woord verschijnt.'},
- {name:'Opzeggen',help:'Schrijf de hele tekst uit je hoofd op en laat hem controleren.'}
-];
-let hideLvl=40, typeIdx=0, typeErr=0, peeks=0, result=null;
+/* ---------- Oefenen en toetsen ---------- */
+/* Oefenvormen. Elk vak heeft zijn eigen programma: veel steun bij het inprenten, steeds minder naarmate de tekst hoger in de doos staat. */
+const KINDS={
+ listen:{name:'Luisteren',help:'Luister naar de tekst en lees in gedachten mee.'},
+ read:{name:'Hardop lezen',help:'Lees de tekst hardop, rustig en met aandacht voor de overgangen tussen de verzen.'},
+ letters:{name:'Beginletters',help:'Zeg de tekst hardop op met alleen de eerste letters als steun. Tik op een woord om te spieken.'},
+ gaps:{name:'Gaten',help:'Zeg de tekst hardop op en vul de gaten zelf in. Tik op een gat om te spieken.'},
+ echo:{name:'Naspreken',help:'De app leest deel voor deel voor en laat steeds een pauze. Spreek elk deel hardop na.'},
+ cue:{name:'Aanvullen',help:'De app leest het begin van elk deel. Maak het deel hardop af; daarna hoor je het hele deel.'},
+ typel:{name:'Letters typen',help:'Typ van elk woord alleen de eerste letter. Goed = het woord verschijnt.'},
+ recite:{name:'Opzeggen',help:'Zeg de tekst op zonder hulp: typ hem, of zeg hem hardop en controleer jezelf.'},
+ test:{name:'Toets',help:'Zeg de tekst op zonder hulp. Typ hem, of zeg hem hardop en controleer jezelf eerlijk.'}
+};
+/* Na een foutloze toets: wat er nog volgt, per vak waarin de tekst stond */
+const AFTER={1:[['read',2],['cue',1]],2:[['listen',1],['read',1]],3:[['read',1]]};
+const PROGRAM=()=>[
+ ['Nieuw','Luisteren · naspreken · 3× hardop lezen · beginletters · gaten · opzeggen met weinig hulp. '+(state.settings.segPerDay?'Lange gedeelten in porties van '+state.settings.segPerDay+(state.settings.segPerDay===1?' deel':' delen')+' per dag.':'Lange gedeelten in één keer.')],
+ ['Vak 1','Toets, daarna 2× hardop lezen en 1× aanvullen.'],
+ ['Vak 2','Toets, daarna 1× luisteren en 1× hardop lezen.'],
+ ['Vak 3','Toets, daarna 1× hardop lezen.'],
+ ['Vak 4–7','Alleen de toets.'],
+ ['Bij een fout','Herstel: luisteren, naspreken en 2× lezen van de delen die misgingen, beginletters, en daarna de hele tekst met gaten.'],
+ ['Automodus','Hetzelfde programma, maar alles via spraak: hardop lezen wordt naspreken, beginletters en gaten worden aanvullen.']];
+
+let plan=null, SEG=[], W=[], AT={}, typeIdx=0, typeErr=0, result=null, revealed=false, bad=new Set(), mode='free', outcome=null;
+const mkStep=(kind,need=1,gap=null,range=null,title=null,help=null)=>({kind,need,done:0,gap,range,title,help});
+const allR=()=>SEG.map((_,i)=>i);
+const rangeOf=st=>st.range||allR();
+
+/* Delen: per vers; lange verzen (of een lange losse tekst) worden bij leestekens gesplitst */
+function segmentsOf(v){
+  const Wd=words(v.text), mk=(marksOf(v)||[]).filter(m=>m[0]<Wd.length), base=[], out=[];
+  if(mk.length>1)mk.forEach(([w,n],i)=>base.push([w,i+1<mk.length?mk[i+1][0]:Wd.length,'vers '+n]));
+  else base.push([0,Wd.length,'']);
+  base.forEach(([a,b,lab])=>{
+    if(b-a<=28){out.push({a,b,lab});return}
+    const parts=[];let s=a;
+    for(let i=a;i<b;i++){const len=i-s+1,endP=/[.;:?!]$/.test(Wd[i])||(/,$/.test(Wd[i])&&len>=18);
+      if((endP&&len>=8&&b-i-1>=6)||len>=28){parts.push([s,i+1]);s=i+1}}
+    if(s<b){if(parts.length&&b-s<6)parts[parts.length-1][1]=b;else parts.push([s,b])}
+    parts.forEach((p,k)=>out.push({a:p[0],b:p[1],lab:lab?(parts.length>1?lab+String.fromCharCode(97+k):lab):''}));
+  });
+  out.forEach((g,i)=>{if(!g.lab)g.lab=out.length>1?'deel '+(i+1):'tekst'});
+  return out;
+}
+const segText=g=>W.slice(SEG[g].a,SEG[g].b).join(' ');
+const rangeLabel=r=>{if(r.length===SEG.length)return 'de hele tekst';if(r.length===1)return SEG[r[0]].lab;
+  if(r.every((g,i)=>!i||g===r[i-1]+1))return SEG[r[0]].lab+' t/m '+SEG[r[r.length-1]].lab;
+  const l=r.map(g=>SEG[g].lab);return l.slice(0,-1).join(', ')+' en '+l[l.length-1]};
+
+/* Voorlezen met de spraak van het toestel */
+const TTS={ok:typeof window.speechSynthesis!=='undefined',playing:false,seg:-1};
+function speakable(t){return t.replace(/\b([A-ZÀ-Ý]{2,})\b/g,w=>w[0]+w.slice(1).toLowerCase())}
+function pickVoice(){try{const vs=speechSynthesis.getVoices();return vs.find(v=>/^nl[-_]NL/i.test(v.lang))||vs.find(v=>/^nl/i.test(v.lang))||null}catch(e){return null}}
+function stopTTS(){TTS.playing=false;TTS.seg=-1;try{speechSynthesis.cancel()}catch(e){}if(typeof audStop==='function'){audStop();REC.on=false;REC.tok=0}}
+function play(rng,onEnd){
+  stopTTS();TTS.playing=true;let k=0;
+  const next=()=>{if(!TTS.playing)return;
+    if(k>=rng.length){TTS.playing=false;TTS.seg=-1;hlSeg();onEnd&&onEnd();return}
+    const g=rng[k++];TTS.seg=g;hlSeg();
+    const u=new SpeechSynthesisUtterance(speakable(segText(g)));u.lang='nl-NL';const v=pickVoice();if(v)u.voice=v;u.rate=state.settings.rate;
+    u.onend=next;u.onerror=e=>{if(e.error==='interrupted'||e.error==='canceled')return;TTS.playing=false;TTS.seg=-1;hlSeg();
+      toast('Voorlezen lukt niet. Controleer of er een Nederlandse stem op je toestel staat.')};
+    try{speechSynthesis.speak(u)}catch(e){TTS.playing=false;hlSeg()}};
+  next();
+}
+function hlSeg(){document.querySelectorAll('.seg[data-g]').forEach(p=>p.classList.toggle('speaking',+p.dataset.g===TTS.seg));
+  const b=document.getElementById('play');if(b)b.textContent=TTS.playing?'■ Stop':'▶ Voorlezen';
+  const r=document.getElementById('run');if(r)r.textContent=AUD.running?'■ Stop':'▶ Start'}
+
 function startNext(){const id=queue.shift();if(!id){toast('Klaar voor vandaag');go('home');return}openPractice(id)}
-function openPractice(id){cur=state.verses.find(v=>v.id===id);if(!cur)return startNext();
-  stage=cur.reps===0?0:(cur.box>=3?4:2);resetStage();view='practice';document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current','false'));render();window.scrollTo(0,0)}
-function resetStage(){typeIdx=0;typeErr=0;peeks=0;result=null}
+function prep(){W=words(cur.text);AT={};(marksOf(cur)||[]).forEach(([w,n])=>AT[w]=n);SEG=segmentsOf(cur)}
+function openPractice(id){stopTTS();cur=state.verses.find(v=>v.id===id);if(!cur)return startNext();
+  prep();mode=cur.box===0?'intro':cur.due<=today()?'test':'free';outcome=null;plan=buildPlan();resetStep();view='practice';
+  document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current','false'));render();window.scrollTo(0,0)}
+function resetStep(){typeIdx=0;typeErr=0;result=null;revealed=false;bad=new Set()}
 function seeded(i,salt){let x=Math.sin((i+1)*9301+salt*49297)*233280;return x-Math.floor(x)}
+function failBox(b){return state.settings.fail==='mild'?Math.max(1,b-1):1}
+
+function buildPlan(){
+  if(mode==='test')return {i:0,steps:[mkStep('test')]};
+  if(mode==='free')return {i:0,free:true,steps:['listen','echo','read','cue','letters','gaps','typel','recite'].map(k=>mkStep(k,0,k==='gaps'?50:null))};
+  const all=allR(), start=Math.min(cur.intro|0,SEG.length), end=Math.min(SEG.length,start+(state.settings.segPerDay||SEG.length));
+  const nr=all.slice(start,end), known=all.slice(0,start), sofar=all.slice(0,end), steps=[];
+  if(known.length)steps.push(mkStep('letters',1,null,known,'Herhalen','Zeg eerst op wat je eerder hebt ingeprent ('+rangeLabel(known)+'), met de beginletters als steun.'));
+  steps.push(mkStep('listen',1,null,nr),mkStep('echo',1,null,nr),mkStep('read',3,null,nr),mkStep('letters',1,null,nr),mkStep('gaps',1,50,nr));
+  steps.push(mkStep('gaps',1,85,sofar,'Weinig hulp','Zeg '+(known.length?'alles wat je nu kent':'de tekst')+' op met nog maar een paar woorden als steun.'));
+  return {i:0,steps,intro:{start,end}};
+}
+function afterSteps(pass,weak){
+  if(pass)return (AFTER[outcome.from]||[]).map(([k,n,g])=>mkStep(k,n,g||null));
+  const wk=weak&&weak.length&&weak.length<SEG.length?weak:null, lab=wk?' ('+rangeLabel(wk)+')':'';
+  return [mkStep('listen',1,null,wk,'Herstel: luisteren','Luister naar wat misging'+lab+'.'),
+          mkStep('echo',1,null,wk,'Herstel: naspreken','Spreek na wat misging'+lab+'.'),
+          mkStep('read',2,null,wk,'Herstel: lezen','Lees hardop wat misging'+lab+'.'),
+          mkStep('letters',1,null,wk),mkStep('gaps',1,60,null,'Hele tekst','Zeg de hele tekst op met gaten.')];
+}
+
+/* Leitner-regel: foutloos = één vak verder, fout = terug (vak 1 of één vak), volgende dag opnieuw */
+function applyResult(pass,weak,canUndo){
+  const L=todayLog(), before={box:cur.box,due:cur.due,last:cur.last,tests:cur.tests,passes:cur.passes,weak:cur.weak,lt:L.tests,lo:L.ok};
+  const from=cur.box, to=pass?Math.min(from+1,7):failBox(from);
+  cur.box=to;cur.due=addDays(today(),pass?BOX_DAYS[to]:1);cur.weak=pass?[]:(weak||[]);
+  cur.last={date:today(),ok:pass};cur.tests=(cur.tests|0)+1;if(pass)cur.passes=(cur.passes|0)+1;
+  L.tests++;if(pass)L.ok++;save();
+  outcome={pass,from,to,before,canUndo:!pass&&!!canUndo};
+  plan.steps=[plan.steps[0],...afterSteps(pass,weak)];
+}
+function undoFail(){const b=outcome.before,L=todayLog();
+  Object.assign(cur,{box:b.box,due:b.due,last:b.last,tests:b.tests,passes:b.passes,weak:b.weak});L.tests=b.lt;L.ok=b.lo;
+  applyResult(true,[],false)}
+function introDone(end){todayLog().intro++;cur.introDay=today();
+  if(end>=SEG.length){cur.box=1;cur.due=addDays(today(),1);delete cur.intro}else cur.intro=end;save()}
+function finishIntro(){
+  const {end}=plan.intro, r=cur.ref;introDone(end);startNext();
+  toast(end>=SEG.length?r+' staat in vak 1 · morgen de eerste toets':r+': '+end+' van '+SEG.length+' delen ingeprent · morgen verder')
+}
+
+function textHTML(rng,wf){return rng.map(g=>{const s=SEG[g];let h='';
+  for(let i=s.a;i<s.b;i++)h+=(i>s.a?' ':'')+vnum(AT,i)+wf(W[i],i);
+  return `<p class="seg" data-g="${g}">${h}</p>`}).join('')}
+const plainW=w=>esc(w);
+const lettersW=(w,i)=>{const m=w.match(/^([^A-Za-zÀ-ÿ0-9]*)(.)(.*)$/);return m?`<span class="w fl">${esc(m[1]+m[2])}<span class="rest">${esc(m[3])}</span></span>`:esc(w)};
+const gapsW=lvl=>(w,i)=>seeded(i,cur.ref.length)*100<lvl?`<span class="w hid" tabindex="0">${esc(w)}</span>`:esc(w);
 
 function renderPractice(){
-  const W=words(cur.text);
-  let h=`<div class="controls" style="margin-top:14px"><button class="ghost" id="back">← Overzicht</button>${queue.length?`<span class="stat">nog ${queue.length} na deze</span>`:''}</div>
-  <div class="stages" role="tablist">${STAGES.map((s,i)=>`<button role="tab" class="ghost" aria-current="${i===stage}" data-s="${i}">${i+1}. ${s.name}</button>`).join('')}</div>
-  <p class="stagehelp">${STAGES[stage].help}</p>
-  <div class="card"><div class="vref">${esc(cur.ref)}</div><div class="verse" id="verse">`;
-  if(stage===0)h+=esc(cur.text);
-  if(stage===1)h+=W.map((w,i)=>{const m=w.match(/^([^A-Za-zÀ-ÿ0-9]*)(.)(.*)$/);return m?`<span class="w fl" data-i="${i}">${esc(m[1]+m[2])}<span class="rest">${esc(m[3])}</span></span>`:esc(w)}).join(' ');
-  if(stage===2)h+=W.map((w,i)=>seeded(i,cur.ref.length)*100<hideLvl?`<span class="w hid" data-i="${i}" tabindex="0">${esc(w)}</span>`:esc(w)).join(' ');
-  if(stage===3)h+=W.map((w,i)=>i<typeIdx?`<span class="w done">${esc(w)}</span>`:`<span class="w ${i===typeIdx?'next':''}"><span class="rest">${esc(w)}</span></span>`).join(' ');
-  if(stage===4&&result)h+=result.html;
+  const S=state.settings, st=plan.steps[plan.i], K=KINDS[st.kind], rng=rangeOf(st);
+  const isTest=st.kind==='test', locked=isTest&&!outcome, last=plan.i===plan.steps.length-1, stepDone=st.done>=st.need;
+  const up=Math.min(cur.box+1,7);
+  let h=`<div class="controls" style="margin-top:14px"><button class="ghost" id="back">← Overzicht</button>${queue.length?`<span class="stat">nog ${queue.length} na deze</span>`:''}</div>`;
+  if(mode==='intro'){const {start,end}=plan.intro;
+    h+=`<div class="mode">${chip(0)}<span>Inprenten${SEG.length>1?`: ${rangeLabel(allR().slice(start,end))} (${end-start} van ${SEG.length} delen${start?', '+start+' al eerder':''})`:''}. ${end>=SEG.length?'Na deze stappen gaat de tekst naar vak 1; morgen volgt de eerste toets.':'Morgen ga je verder met de volgende delen.'}</span></div>`}
+  if(mode==='test'&&!outcome){const fb=failBox(cur.box);
+    h+=`<div class="mode"><span class="chip ${cur.box===7?'lang':''}">Toets · vak ${cur.box}</span><span>Foutloos: ${cur.box===7?'blijft in vak 7':'naar vak '+up}, volgende toets over ${BOX_DAYS[up]} ${BOX_DAYS[up]===1?'dag':'dagen'}. Fout: ${fb===cur.box?'blijft in vak '+fb:'naar vak '+fb}, morgen opnieuw.</span></div>`}
+  if(mode==='free')h+=`<div class="mode">${chip(cur.box)}<span>Vrij oefenen. Dit telt niet mee voor de doos. De volgende toets is ${relDay(cur.due)} (${fmtDate(cur.due)}).</span></div>`;
+  if(outcome){const o=outcome;
+    h+=`<div class="verdict ${o.pass?'ok':'no'}" role="status"><strong>${o.pass?'Foutloos.':'Nog niet foutloos.'}</strong>
+      ${o.pass?(o.from===7?'Blijft in vak 7, de lange termijn.':`Van vak ${o.from} naar vak ${o.to}.`):(o.to===o.from?`Blijft in vak ${o.to}.`:`Terug naar vak ${o.to}.`)}
+      Volgende toets ${relDay(cur.due)} (${fmtDate(cur.due)}).${plan.steps.length>1?(o.pass?' Rond af met de stappen hieronder.':' Herstel hem nu met de stappen hieronder.'):''}
+      ${o.canUndo?'<br><button class="linkish" id="undo">Alleen een typfout of verkeerd verstaan? Reken als goed</button>':''}</div>`}
+  if(!locked&&plan.steps.length>1)h+=`<div class="steps" role="tablist">${plan.steps.map((s,i)=>{const t=s.title||KINDS[s.kind].name,ok=s.need>0&&s.done>=s.need;
+    return `<button role="tab" class="stp ${ok?'ok':''}" aria-current="${i===plan.i}" data-st="${i}">${plan.free?'':(i+1)+'. '}${t}${s.need>1?` ${Math.min(s.done,s.need)}/${s.need}`:''}${ok?' ✓':''}</button>`}).join('')}</div>`;
+  h+=`<p class="stagehelp">${st.help||K.help}${rng.length<SEG.length&&!st.help&&!isTest&&st.kind!=='recite'?` <b>${rangeLabel(rng)}</b>.`:''}</p>`;
+  const reciting=isTest||st.kind==='recite', M=S.method==='spraak'&&!SRC?'hardop':S.method;
+  if(reciting&&!result&&!revealed&&!REC.on)h+=`<div class="methods" role="group" aria-label="Manier van opzeggen"><button data-m="typen" aria-pressed="${M==='typen'}">Typen</button><button data-m="hardop" aria-pressed="${M==='hardop'}">Hardop</button>${SRC?`<button data-m="spraak" aria-pressed="${M==='spraak'}">Inspreken</button>`:''}</div>`;
+  h+=`<div class="card"><div class="vref">${esc(cur.ref)}</div><div class="verse" id="verse">`;
+  if(st.kind==='listen'||st.kind==='read'||st.kind==='echo')h+=textHTML(rng,plainW);
+  if(st.kind==='cue')h+=textHTML(rng,lettersW);
+  if(st.kind==='letters')h+=textHTML(rng,lettersW);
+  if(st.kind==='gaps')h+=textHTML(rng,gapsW(st.gap??50));
+  if(st.kind==='typel')h+=textHTML(rng,(w,i)=>i<typeIdx?`<span class="w done">${esc(w)}</span>`:`<span class="w ${i===typeIdx?'next':''}"><span class="rest">${esc(w)}</span></span>`);
+  if(reciting){
+    if(result)h+=result.html;
+    else if(M==='spraak'&&REC.on)h+=`<p class="heard" id="heard">${esc(REC.text)||'Ik luister…'}</p>`;
+    else if(M==='hardop'&&revealed){
+      if(locked&&SEG.length>1)h+=SEG.map((s,g)=>`<div class="segcheck"><button class="tog ${bad.has(g)?'bad':'good'}" data-tog="${g}" aria-pressed="${bad.has(g)}">${bad.has(g)?'✗ fout':'✓ goed'}</button><div>${textHTML([g],plainW)}</div></div>`).join('');
+      else h+=textHTML(allR(),plainW);
+    }else h+=`<span class="hiddenhint">De tekst is verborgen${SEG.length>1?` (${SEG.length} delen: ${esc(SEG[0].lab)} t/m ${esc(SEG[SEG.length-1].lab)})`:''}. ${M==='hardop'?'Zeg hem hardop op en kijk pas daarna.':M==='spraak'?'Tik op de knop, zeg hem op en sluit af met “klaar”. De app controleert wat hij hoort.':'Typ hem hieronder.'}</span>${REC.err?`<p class="note err">${MICERR[REC.err]||MICERR.start}</p>`:''}`;
+  }
   h+='</div>';
-  if(stage===2)h+=`<div class="controls"><span class="stat">Verborgen</span><input type="range" id="lvl" min="0" max="100" step="10" value="${hideLvl}" aria-label="Percentage verborgen woorden"><span class="stat">${hideLvl}%</span></div>`;
-  if(stage===3)h+=`<div class="controls"><input class="keyin" id="key" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Typ beginletter"><button id="focus">${typeIdx>=W.length?'Opnieuw':'Tik hier en typ'}</button><span class="stat" id="tstat">${typeIdx}/${W.length} woorden · ${typeErr} fout</span></div>`;
-  if(stage===4&&!result)h+=`<textarea id="recite" placeholder="Schrijf de tekst uit je hoofd op…" aria-label="Je opgezegde tekst"></textarea><div class="controls"><button class="primary" id="check">Controleer</button></div>`;
-  if(stage===4&&result)h+=`<div class="controls"><span class="score">${result.pct}%</span><span class="stat">${result.ok} van ${W.length} woorden goed${result.extra?' · '+result.extra+' extra':''}</span><button id="again">Nog eens</button></div>
-    <p class="note">Rood onderstreept = gemist of anders geschreven. Doorgestreept = woord dat er niet in hoort.</p>`;
+  // bediening per oefenvorm
+  const cnt=(label)=>`<button id="count" class="${stepDone&&st.need?'':'primary'}">${label}${st.need?` (${Math.min(st.done,st.need)}/${st.need})`:''}</button>`;
+  if(st.kind==='listen'||st.kind==='read'){
+    h+=`<div class="controls">`;
+    if(TTS.ok)h+=`<button id="play" class="${st.kind==='listen'&&!stepDone?'primary':''}">${TTS.playing?'■ Stop':'▶ Voorlezen'}</button>
+      <select id="rate" aria-label="Voorleessnelheid">${[[0.7,'langzaam'],[0.85,'rustig'],[1,'normaal']].map(([r,l])=>`<option value="${r}" ${S.rate==r?'selected':''}>${l}</option>`).join('')}</select>`;
+    h+=st.kind==='listen'?`<button id="count" class="ghost">Geluisterd${st.need?` (${Math.min(st.done,st.need)}/${st.need})`:''}</button>`:cnt('Hardop gelezen ✓');
+    h+=`</div>`;
+    if(!TTS.ok&&st.kind==='listen')h+=`<p class="note">Voorlezen werkt niet in deze browser. Lees de tekst dan rustig in gedachten en tik op “Geluisterd”.</p>`;
+  }
+  if(st.kind==='echo'||st.kind==='cue'){
+    h+=`<div class="controls">${TTS.ok?`<button id="run" class="${stepDone&&st.need?'':'primary'}">${AUD.running?'■ Stop':'▶ Start'}</button>
+      <select id="echoLen" aria-label="Lengte van de pauze">${[[0.7,'korte pauze'],[1,'normale pauze'],[1.4,'lange pauze'],[1.8,'heel lange pauze']].map(([r,l])=>`<option value="${r}" ${S.echo==r?'selected':''}>${l}</option>`).join('')}</select>`:''}
+      <button id="count" class="ghost">Gedaan${st.need?` (${Math.min(st.done,st.need)}/${st.need})`:''}</button></div>`;
+    if(!TTS.ok)h+=`<p class="note">Voorlezen werkt niet in deze browser. ${st.kind==='echo'?'Lees elk deel en zeg het met je ogen dicht na.':'Lees de beginletters en maak elk deel hardop af.'}</p>`;
+  }
+  if(st.kind==='letters')h+=`<div class="controls">${cnt('Opgezegd ✓')}</div>`;
+  if(st.kind==='gaps')h+=`<div class="controls"><span class="stat">Verborgen</span><input type="range" id="lvl" min="0" max="100" step="10" value="${st.gap??50}" aria-label="Percentage verborgen woorden"><span class="stat">${st.gap??50}%</span></div><div class="controls">${cnt('Opgezegd ✓')}</div>`;
+  if(st.kind==='typel')h+=`<div class="controls"><input class="keyin" id="key" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Typ beginletter"><button id="focus">${typeIdx>=W.length?'Opnieuw':'Tik hier en typ'}</button><span class="stat" id="tstat">${typeIdx}/${W.length} woorden · ${typeErr} fout</span></div>`;
+  if(reciting){
+    if(M==='spraak'&&!result){
+      h+=REC.on?`<div class="controls"><button class="primary" id="recStop">■ Klaar</button><span class="stat">Ik luister… zeg “klaar” of tik op Klaar</span></div>`
+               :`<div class="controls"><button class="primary" id="recGo">● Begin met opzeggen</button></div>`;
+    }else if(M!=='hardop'){
+      if(!result)h+=`<textarea id="recite" placeholder="Schrijf de tekst uit je hoofd op…" aria-label="Je opgezegde tekst"></textarea><div class="controls"><button class="primary" id="check">Controleer</button></div>`;
+      else h+=`<div class="controls"><span class="score">${result.pct}%</span><span class="stat">${result.ok} van ${W.length} woorden ${result.spoken?'herkend':'goed'}${result.extra&&!result.spoken?' · '+result.extra+' extra':''}</span>${isTest?'':'<button id="again">Nog eens</button>'}${TTS.ok?'<button id="playAll">▶ Lees de juiste tekst voor</button>':''}</div>
+        <p class="note">Rood onderstreept = gemist of anders ${result.spoken?'verstaan':'geschreven'}. Doorgestreept = woord dat er niet in hoort.${result.spoken?' Spraakherkenning is niet perfect: kleine verschillen in uitspraak worden goed gerekend.':''}</p>`;
+    }else{
+      if(!revealed)h+=`<div class="controls"><button class="primary" id="reveal">Toon de tekst</button></div>`;
+      else if(locked&&SEG.length>1)h+=`<p class="note">Tik op de delen waarin je een fout maakte of hulp nodig had.</p><div class="controls"><button class="primary" id="confirm">Bevestig: ${SEG.length-bad.size} van ${SEG.length} delen foutloos</button></div>`;
+      else if(locked)h+=`<div class="label" style="margin-top:16px">Kende je hem woord voor woord?</div><div class="controls"><button class="primary" data-self="1">Foutloos opgezegd</button><button data-self="0">Fout of hulp nodig</button></div>`;
+      else if(!isTest)h+=`<div class="controls"><button id="again">Nog eens</button></div>`;
+    }
+  }
   h+='</div>';
-  if(stage<4)h+=`<div class="controls"><button class="primary" id="nextStage">Volgende stap →</button></div>`;
-  h+=`<div class="rate"><div class="label">Hoe ging het opzeggen?</div><div class="btns">
-    <button data-r="0">Opnieuw<small>vandaag nog</small></button>
-    <button data-r="1">Moeilijk<small>${fmt(nextDays(1))}</small></button>
-    <button data-r="2">Goed<small>${fmt(nextDays(2))}</small></button>
-    <button data-r="3">Makkelijk<small>${fmt(nextDays(3))}</small></button></div></div>`;
-  app.innerHTML=h;
+  // verder
+  const acts=[];
+  if(!plan.free&&!locked){
+    if(!last)acts.push(`<button class="${stepDone?'primary':''}" id="nextStep">Volgende stap →</button>`);
+    else if(mode==='intro')acts.push(`<button class="${stepDone?'primary':''}" id="finishIntro">${plan.intro.end>=SEG.length?'Klaar → vak 1':'Klaar voor vandaag'}</button>`);
+    else acts.push(`<button class="${stepDone?'primary':''}" id="nextText">${queue.length?'Volgende tekst →':'Klaar'}</button>`);
+  }
+  if(mode==='intro'&&queue.length)acts.push(`<button class="ghost" id="skip">Later</button>`);
+  if(acts.length)h+=`<div class="controls">${acts.join('')}</div>`;
+  app.innerHTML=h;hlSeg();
 
-  document.getElementById('back').onclick=()=>{queue=[];go('home')};
-  app.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{stage=+b.dataset.s;resetStage();renderPractice()});
-  const ns=document.getElementById('nextStage');if(ns)ns.onclick=()=>{stage++;resetStage();renderPractice()};
+  const $=id=>document.getElementById(id);
+  $('back').onclick=()=>{queue=[];go('home')};
+  const goStep=i=>{stopTTS();plan.i=i;resetStep();renderPractice();window.scrollTo(0,0)};
+  app.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>goStep(+b.dataset.st));
+  if($('nextStep'))$('nextStep').onclick=()=>goStep(plan.i+1);
+  app.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{S.method=b.dataset.m;save();REC.err=null;resetStep();renderPractice()});
   app.querySelectorAll('.w.fl').forEach(e=>e.onclick=()=>e.classList.toggle('peek'));
-  app.querySelectorAll('.w.hid').forEach(e=>{const show=()=>{e.classList.remove('hid');peeks++};e.onclick=show;e.onkeydown=k=>{if(k.key==='Enter'||k.key===' '){k.preventDefault();show()}}});
-  const lvl=document.getElementById('lvl');if(lvl)lvl.oninput=()=>{hideLvl=+lvl.value;renderPractice()};
-  if(stage===3){const k=document.getElementById('key'),f=document.getElementById('focus');
-    f.onclick=()=>{if(typeIdx>=W.length){resetStage();renderPractice();document.getElementById('key').focus()}else k.focus()};
+  app.querySelectorAll('.w.hid').forEach(e=>{const show=()=>e.classList.remove('hid');e.onclick=show;e.onkeydown=k=>{if(k.key==='Enter'||k.key===' '){k.preventDefault();show()}}});
+  if($('lvl'))$('lvl').oninput=()=>{st.gap=+$('lvl').value;renderPractice()};
+  if($('count'))$('count').onclick=()=>{st.done++;if(st.kind==='listen')stopTTS();renderPractice()};
+  if($('play'))$('play').onclick=()=>{if(TTS.playing){stopTTS();hlSeg();return}
+    play(rng,()=>{if(st.kind==='listen'){st.done++;renderPractice()}})};
+  if($('run'))$('run').onclick=()=>{if(AUD.running){stopTTS();hlSeg();return}
+    runSegs(st.kind,rng,()=>{st.done++;renderPractice()})};
+  if($('echoLen'))$('echoLen').onchange=e=>{S.echo=+e.target.value;save()};
+  if($('playAll'))$('playAll').onclick=()=>{if(TTS.playing){stopTTS();return}play(allR(),()=>{})};
+  if($('recGo'))$('recGo').onclick=()=>{stopTTS();audReset();const tok=Date.now();REC={on:true,text:'',err:null,tok};renderPractice();beep();
+    hear({maxMs:W.length*900+30000,silenceMs:5000,firstMs:12000,onText:t=>{REC.text=t;const e=document.getElementById('heard');if(e)e.textContent=t}}).then(r=>{
+      if(REC.tok!==tok)return;REC.on=false;
+      if(r.err&&r.err!=='end'){REC.err=r.err;renderPractice();return}
+      if(!r.text.trim()){toast('Ik hoorde niets. Probeer het nog eens.');renderPractice();return}
+      result=compare(W,words(fixSpoken(r.text)),AT,looseEq);result.spoken=true;
+      if(locked)applyResult(result.ok===W.length,weakOf(result),true);
+      renderPractice()})};
+  if($('recStop'))$('recStop').onclick=()=>{if(AUD.rec)AUD.rec.stop()};
+  if($('rate'))$('rate').onchange=e=>{S.rate=+e.target.value;save();if(TTS.playing){stopTTS();hlSeg()}};
+  if(st.kind==='typel'){const k=$('key'),f=$('focus');
+    f.onclick=()=>{if(typeIdx>=W.length){resetStep();renderPractice();$('key').focus()}else k.focus()};
     k.oninput=()=>{const ch=norm(k.value.slice(-1));k.value='';if(!ch||typeIdx>=W.length)return;
       const want=norm(W[typeIdx])[0]||'';
-      if(ch===want){typeIdx++;renderPractice();const nk=document.getElementById('key');nk.focus();if(typeIdx>=W.length)toast(typeErr?'Klaar · '+typeErr+' fout':'Foutloos!')}
-      else{typeErr++;const n=app.querySelector('.w.next');if(n){n.classList.add('err');setTimeout(()=>n.classList.remove('err'),350)}document.getElementById('tstat').textContent=typeIdx+'/'+W.length+' woorden · '+typeErr+' fout'}};
+      if(ch===want){typeIdx++;renderPractice();$('key').focus();if(typeIdx>=W.length)toast(typeErr?'Klaar · '+typeErr+' fout':'Foutloos!')}
+      else{typeErr++;const n=app.querySelector('.w.next');if(n){n.classList.add('err');setTimeout(()=>n.classList.remove('err'),350)}$('tstat').textContent=typeIdx+'/'+W.length+' woorden · '+typeErr+' fout'}};
     if(typeIdx>0&&typeIdx<W.length)k.focus();}
-  const c=document.getElementById('check');if(c)c.onclick=()=>{result=compare(W,words(document.getElementById('recite').value));renderPractice()};
-  const a=document.getElementById('again');if(a)a.onclick=()=>{result=null;renderPractice();document.getElementById('recite').focus()};
-  app.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>rate(+b.dataset.r));
+  if($('check'))$('check').onclick=()=>{const t=$('recite').value;if(!t.trim()){$('recite').focus();return}
+    result=compare(W,words(t),AT);
+    if(locked){const ms=new Set(result.miss),weak=SEG.map((s,g)=>g).filter(g=>{for(let i=SEG[g].a;i<SEG[g].b;i++)if(ms.has(i))return true;return false});
+      applyResult(result.ok===W.length&&result.extra===0,weak,true)}
+    renderPractice()};
+  if($('again'))$('again').onclick=()=>{resetStep();renderPractice();if($('recite'))$('recite').focus()};
+  if($('reveal'))$('reveal').onclick=()=>{revealed=true;renderPractice()};
+  app.querySelectorAll('[data-tog]').forEach(b=>b.onclick=()=>{const g=+b.dataset.tog;bad.has(g)?bad.delete(g):bad.add(g);renderPractice()});
+  if($('confirm'))$('confirm').onclick=()=>{applyResult(bad.size===0,[...bad].sort((a,b)=>a-b),false);renderPractice()};
+  app.querySelectorAll('[data-self]').forEach(b=>b.onclick=()=>{const ok=b.dataset.self==='1';applyResult(ok,ok?[]:allR(),false);renderPractice()});
+  if($('undo'))$('undo').onclick=()=>{undoFail();renderPractice()};
+  if($('finishIntro'))$('finishIntro').onclick=()=>{stopTTS();finishIntro()};
+  if($('nextText'))$('nextText').onclick=()=>{stopTTS();startNext()};
+  if($('skip'))$('skip').onclick=()=>{stopTTS();startNext()};
 }
-function nextDays(r){const b=r===1?Math.max(cur.box,1):r===2?cur.box+1:cur.box+2;return INTERVALS[Math.min(b,INTERVALS.length-1)]||1}
-function fmt(d){return d===1?'morgen':'over '+d+' dagen'}
-function rate(r){
-  if(r===0){cur.box=0;cur.due=today();queue.push(cur.id)}
-  else{cur.box=Math.min(r===1?Math.max(cur.box,1):r===2?cur.box+1:cur.box+2,INTERVALS.length-1);cur.due=addDays(today(),INTERVALS[cur.box]||1)}
-  cur.reps++;save();startNext();
+/* ---------- Spraak: naspreken, aanvullen, inspreken en automodus ---------- */
+const SRC=window.SpeechRecognition||window.webkitSpeechRecognition||null;
+const AUD={stop:false,skip:false,again:false,paused:false,running:false,kicks:new Set(),rec:null,resume:null};
+const A_STOP={s:1},A_SKIP={s:2},A_AGAIN={s:3};
+let REC={on:false,text:'',err:null};
+function kick(){const ks=[...AUD.kicks];AUD.kicks.clear();ks.forEach(f=>f())}
+function sleep(ms){return new Promise(r=>{const k=()=>{clearTimeout(t);r()};const t=setTimeout(()=>{AUD.kicks.delete(k);r()},ms);AUD.kicks.add(k)})}
+function say(text,rate){return new Promise(res=>{
+  if(!TTS.ok||!text)return res(false);
+  let done=false;const fin=ok=>{if(done)return;done=true;AUD.kicks.delete(k);res(ok)};const k=()=>fin(false);AUD.kicks.add(k);
+  const u=new SpeechSynthesisUtterance(speakable(text));u.lang='nl-NL';const v=pickVoice();if(v)u.voice=v;u.rate=rate||state.settings.rate;
+  u.onend=()=>fin(true);u.onerror=()=>fin(false);
+  try{speechSynthesis.speak(u)}catch(e){fin(false)}
+  // vangnet: sommige toestellen melden het einde niet
+  setTimeout(()=>fin(true),2500+text.length*160/(u.rate||1));
+})}
+async function chk(p){const r=await p;
+  if(AUD.stop)throw A_STOP;
+  if(AUD.paused){await new Promise(r2=>AUD.resume=r2);if(AUD.stop)throw A_STOP;AUD.again=true}
+  if(AUD.skip)throw A_SKIP;if(AUD.again)throw A_AGAIN;return r}
+async function unit(fn){for(;;){try{return await fn()}catch(e){if(e===A_AGAIN){AUD.again=false;continue}throw e}}}
+function hush(){try{speechSynthesis.cancel()}catch(e){}if(AUD.rec)AUD.rec.stop();kick()}
+function audStop(){AUD.stop=true;AUD.running=false;if(AUD.paused){AUD.paused=false;const r=AUD.resume;AUD.resume=null;r&&r()}hush()}
+function audReset(){AUD.stop=false;AUD.skip=false;AUD.again=false;AUD.paused=false}
+function audAgain(){AUD.again=true;hush()}
+function audSkip(){AUD.skip=true;hush()}
+function audPause(){if(AUD.paused){AUD.paused=false;const r=AUD.resume;AUD.resume=null;r&&r()}else{AUD.paused=true;hush()}}
+let ACX=null;
+function beep(f=880,ms=150){try{ACX=ACX||new (window.AudioContext||window.webkitAudioContext)();if(ACX.state==='suspended')ACX.resume();
+  const o=ACX.createOscillator(),g=ACX.createGain(),t=ACX.currentTime;o.frequency.value=f;g.gain.setValueAtTime(0.18,t);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+ms/1000);o.connect(g);g.connect(ACX.destination);o.start(t);o.stop(t+ms/1000+0.03)}catch(e){}}
+const pauseFor=n=>Math.round((n*0.45/(state.settings.rate||0.85)+1.3)*(state.settings.echo||1)*1000);
+
+/* Luisteren naar de gebruiker (spraakherkenning van het toestel) */
+function hear({maxMs=180000,silenceMs=3500,firstMs=9000,onText}={}){return new Promise(res=>{
+  if(!SRC)return res({err:'none',text:''});
+  let committed='',sess='',last=0,done=false,rec=null;const t0=Date.now();
+  const join=rs=>{const out=[];for(let i=0;i<rs.length;i++){const t=(rs[i][0]&&rs[i][0].transcript||'').trim();if(!t)continue;
+    const p=out[out.length-1];if(p&&t.toLowerCase().startsWith(p.toLowerCase()))out[out.length-1]=t;else out.push(t)}return out.join(' ')};
+  const text=()=>(committed+' '+sess).replace(/\s+/g,' ').trim();
+  const finish=err=>{if(done)return;done=true;clearInterval(tm);if(AUD.rec===ctl)AUD.rec=null;
+    try{if(rec){rec.onend=null;rec.onresult=null;rec.abort()}}catch(e){}
+    res({err:err||null,text:text().replace(/[\s,.]*\bklaar\b[.!]?\s*$/i,'')})};
+  const start=()=>{rec=new SRC();rec.lang='nl-NL';rec.continuous=true;rec.interimResults=true;rec.maxAlternatives=1;
+    rec.onresult=e=>{sess=join(e.results);last=Date.now();onText&&onText(text());if(/\bklaar\b[.!]?\s*$/i.test(sess))finish()};
+    rec.onerror=e=>{const er=e.error;if(er==='not-allowed'||er==='service-not-allowed'||er==='audio-capture')finish('not-allowed');
+      else if(er==='network')finish('network');else if(er==='language-not-supported')finish('lang')};
+    rec.onend=()=>{if(done)return;committed=text();sess='';try{start()}catch(e){finish('end')}};
+    try{rec.start()}catch(e){finish('start')}};
+  const ctl={stop:()=>finish()};AUD.rec=ctl;start();
+  const tm=setInterval(()=>{const n=Date.now();if(n-t0>maxMs||(last&&n-last>silenceMs)||(!last&&n-t0>firstMs))finish()},250);
+})}
+const NUMW=['nul','een','twee','drie','vier','vijf','zes','zeven','acht','negen','tien','elf','twaalf','dertien','veertien','vijftien','zestien','zeventien','achttien','negentien','twintig'];
+const fixSpoken=t=>t.replace(/\b\d+\b/g,d=>NUMW[+d]||d);
+/* Ruim vergelijken voor spraak: kleine verschillen in klank of spelling tellen als goed */
+function sk(w){return w.replace(/ij|y/g,'ei').replace(/ch/g,'g').replace(/ck|c/g,'k').replace(/z/g,'s').replace(/v/g,'f').replace(/(dt|d)$/,'t').replace(/(.)\1+/g,'$1')}
+function lev(a,b){if(Math.abs(a.length-b.length)>2)return 9;const d=Array.from({length:b.length+1},(_,i)=>i);
+  for(let i=1;i<=a.length;i++){let p=d[0];d[0]=i;for(let j=1;j<=b.length;j++){const t=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,p+(a[i-1]===b[j-1]?0:1));p=t}}return d[b.length]}
+function looseEq(a,b){if(a===b)return true;if(!a||!b)return false;const x=sk(a),y=sk(b);if(x===y)return true;
+  const L=Math.max(x.length,y.length);return L>=4&&lev(x,y)<=(L>=8?2:1)}
+const CMD=[['stop',/\b(stop|stoppen|pauze)\b/],['bad',/\b(fout|niet goed|fouten)\b/],['good',/\b(goed|foutloos|correct|juist)\b/],['again',/\b(herhaal|herhalen|nog een keer|nog eens|opnieuw)\b/],['next',/\b(volgende|verder|door|overslaan)\b/],['done',/\bklaar\b/]];
+function parseCmd(t){t=(t||'').toLowerCase();for(const [k,re] of CMD)if(re.test(t))return k;return null}
+const MICERR={'not-allowed':'De microfoon is geblokkeerd. Geef de app toestemming: tik in Chrome op het slotje of de instellingen naast het adres → Rechten → Microfoon. In de online voorbeeldversie werkt de microfoon niet; gebruik de app op je telefoon.',
+  network:'Spraakherkenning heeft op dit toestel internet nodig. Probeer het opnieuw met verbinding, of download de Nederlandse spraakherkenning voor offline gebruik (Android: Instellingen → Google → Spraak).',
+  lang:'Nederlandse spraakherkenning is niet beschikbaar op dit toestel.',start:'De microfoon kon niet starten. Probeer het nog eens.',none:'Spraakherkenning wordt niet ondersteund in deze browser. Gebruik Chrome op Android.'};
+function weakOf(res){const ms=new Set(res.miss);return allR().filter(g=>{for(let i=SEG[g].a;i<SEG[g].b;i++)if(ms.has(i))return true;return false})}
+
+/* Naspreken en aanvullen, in de gewone oefening */
+async function runSegs(kind,rng,onDone){
+  stopTTS();audReset();AUD.running=true;hlSeg();
+  try{
+    for(const g of rng)await unit(async()=>{TTS.seg=g;hlSeg();const ws=W.slice(SEG[g].a,SEG[g].b);
+      if(kind==='echo'){await chk(say(ws.join(' ')));await chk(sleep(pauseFor(ws.length)))}
+      else{const k=Math.min(ws.length,Math.max(2,Math.ceil(ws.length*0.3)));await chk(say(ws.slice(0,k).join(' ')));
+        if(k<ws.length){await chk(sleep(pauseFor(ws.length-k)));await chk(say(ws.join(' ')))}await chk(sleep(600))}});
+    AUD.running=false;TTS.seg=-1;hlSeg();onDone&&onDone();
+  }catch(e){AUD.running=false;TTS.seg=-1;hlSeg()}
 }
-/* Woord-voor-woord vergelijking (LCS) */
-function compare(orig,typed){
-  const a=orig.map(norm),b=typed.map(norm),n=a.length,m=b.length;
-  const L=Array.from({length:n+1},()=>new Uint16Array(m+1));
-  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=a[i]===b[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
-  let i=0,j=0,out=[],ok=0,extra=0;
-  while(i<n||j<m){
-    if(i<n&&j<m&&a[i]===b[j]){out.push(`<span class="w done">${esc(orig[i])}</span>`);ok++;i++;j++}
-    else if(j<m&&(i>=n||L[i][j+1]>=L[i+1][j])){if(b[j]){out.push(`<span class="w extra">${esc(typed[j])}</span>`);extra++}j++}
-    else{out.push(`<span class="w miss">${esc(orig[i])}</span>`);i++}
+
+/* ---------- Automodus: handsfree oefenen onderweg ---------- */
+const CAR={on:false,what:'today',voice:!!SRC,items:[],idx:0,btn:null,lock:null,finished:false};
+const refSpoken=r=>r.replace(/(\d+):(\d+)\s*[-–]\s*(\d+)/,'$1, vers $2 tot en met $3').replace(/(\d+):(\d+)/,'$1, vers $2');
+const spLabel=rng=>rangeLabel(rng).replace(/(\d+)[a-d]\b/g,'$1').replace(/\bt\/m\b/g,'tot en met');
+function cset(o){const $=id=>document.getElementById(id);
+  if('prog'in o&&$('cProg'))$('cProg').textContent=o.prog;
+  if('ref'in o&&$('cRef'))$('cRef').textContent=o.ref;
+  if('msg'in o&&$('cMsg'))$('cMsg').textContent=o.msg;
+  if('heard'in o&&$('cHeard'))$('cHeard').textContent=o.heard;
+  if('judge'in o&&$('cJudge'))$('cJudge').hidden=!o.judge;
+  if('done'in o&&$('cDone'))$('cDone').hidden=!o.done;
+  if($('cPause'))$('cPause').textContent=AUD.paused?'Verder':'Pauze';
+}
+async function csay(msg,spoken){cset({msg});await chk(say(spoken||msg))}
+function waitButton(){return new Promise(r=>{const k=()=>{if(CAR.btn===fin)CAR.btn=null;r(null)};const fin=v=>{AUD.kicks.delete(k);if(CAR.btn===fin)CAR.btn=null;r(v)};CAR.btn=fin;AUD.kicks.add(k)})}
+async function wakeLock(on){try{if(on&&navigator.wakeLock&&!CAR.lock){CAR.lock=await navigator.wakeLock.request('screen');CAR.lock.addEventListener('release',()=>{CAR.lock=null})}
+  if(!on&&CAR.lock){await CAR.lock.release();CAR.lock=null}}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(CAR.on&&!CAR.finished&&document.visibilityState==='visible')wakeLock(true)});
+
+async function carListen(rng){for(const g of rng)await unit(async()=>{await chk(say(segText(g)))})}
+async function carEcho(rng){for(const g of rng)await unit(async()=>{const n=SEG[g].b-SEG[g].a;cset({msg:'Spreek na · '+SEG[g].lab});await chk(say(segText(g)));await chk(sleep(pauseFor(n)))})}
+async function carCue(rng){for(const g of rng)await unit(async()=>{const ws=W.slice(SEG[g].a,SEG[g].b),k=Math.min(ws.length,Math.max(2,Math.ceil(ws.length*0.3)));
+  cset({msg:'Vul aan · '+SEG[g].lab});await chk(say(ws.slice(0,k).join(' ')));
+  if(k<ws.length){await chk(sleep(pauseFor(ws.length-k)));await chk(say(ws.join(' ')))}await chk(sleep(500))})}
+async function carJudge(){
+  cset({judge:true});
+  try{
+    for(let i=0;i<2;i++){
+      if(CAR.voice){beep(660,120);const pb=waitButton();
+        const r=await chk(Promise.race([pb.then(v=>({btn:v})),hear({maxMs:6000,silenceMs:1300,firstMs:6000}).then(x=>({txt:x.text,err:x.err}))]));
+        if(r.btn){if(AUD.rec)AUD.rec.stop();if(r.btn==='good'||r.btn==='bad')return r.btn;continue}
+        if(r.err&&r.err!=='end'){CAR.voice=false;break}
+        const c=parseCmd(r.txt);if(c==='good'||c==='bad')return c;
+        if(i===0)await csay('Goed of fout?','Zeg goed of fout.');
+      }else break;
+    }
+    cset({msg:'Tik op Goed of Fout'});
+    for(;;){const v=await chk(waitButton());if(v==='good'||v==='bad')return v}
+  }finally{cset({judge:false})}
+}
+async function carTest(){
+  plan={i:0,steps:[mkStep('test')]};outcome=null;const from=cur.box;
+  await csay('Toets · vak '+from,`Toets, vak ${from}. ${refSpoken(cur.ref)}. ${CAR.voice?'Zeg de tekst op na de piep, en zeg klaar als je klaar bent.':'Zeg de tekst op, en tik op klaar als je klaar bent.'}`);
+  let pass=null,weak=[];
+  if(CAR.voice){
+    for(let tries=0;tries<2&&pass===null;tries++){
+      beep();cset({msg:'Zeg de tekst op…',heard:'',done:true});
+      const r=await chk(hear({maxMs:W.length*900+30000,silenceMs:4500,firstMs:12000,onText:t=>cset({heard:t})}));
+      cset({done:false});
+      if(r.err&&r.err!=='end'){CAR.voice=false;await csay('Zonder microfoon verder',r.err==='network'?'Spraakherkenning heeft internet nodig. Ik ga verder zonder.':'De microfoon werkt niet. Ik ga verder zonder spraakherkenning.');break}
+      if(!r.text.trim()){if(tries===0){await csay('Niets gehoord','Ik hoorde niets. Nog een keer, na de piep.');continue}break}
+      const res=compare(W,words(fixSpoken(r.text)),AT,looseEq);
+      if(res.ok===W.length){pass=true;weak=[]}
+      else{weak=weakOf(res);
+        await csay(`${res.ok} van ${W.length} woorden herkend`,`Ik hoorde ${res.ok} van de ${W.length} woorden. Het ging mis in ${spLabel(weak.length?weak:allR())}. Zeg fout, of zeg goed als ik je verkeerd verstond.`);
+        pass=(await carJudge())==='good';if(pass)weak=[];
+      }
+    }
   }
-  return {html:out.join(' '),ok,extra,pct:Math.round(ok/n*100)};
+  if(pass===null){
+    cset({msg:'Zeg de tekst op. Tik op Klaar.',done:true});
+    await chk(Promise.race([waitButton(),sleep(W.length*900+30000)]));cset({done:false});
+    await csay('Zo luidt de tekst','Zo luidt de tekst.');await carListen(allR());
+    await csay('Foutloos?',CAR.voice?'Was het foutloos? Zeg goed of fout.':'Was het foutloos? Tik op goed of fout.');
+    pass=(await carJudge())==='good';weak=pass?[]:allR();
+  }
+  applyResult(pass,weak,false);const o=outcome;
+  await csay(pass?'Foutloos · vak '+o.to:(o.to===o.from?'Blijft in vak ':'Terug naar vak ')+o.to,
+    pass?(o.from===7?'Foutloos. Hij blijft in vak 7.':`Foutloos. Naar vak ${o.to}. Volgende toets over ${BOX_DAYS[o.to]} ${BOX_DAYS[o.to]===1?'dag':'dagen'}.`)
+        :`${o.to===o.from?'Hij blijft in vak '+o.to:'Terug naar vak '+o.to}, morgen opnieuw.${plan.steps.length>1?' We gaan hem nu herstellen.':''}`);
+  for(const s of plan.steps.slice(1)){const rng=rangeOf(s);
+    if(s.kind==='listen'){await csay('Luister','Luister.');await carListen(rng)}
+    else if(s.kind==='read'||s.kind==='echo'){for(let n=0;n<Math.max(1,s.need);n++){await csay('Spreek na','Spreek na.');await carEcho(rng)}}
+    else{await csay('Vul aan','Vul aan.');await carCue(rng)}}
+}
+async function carIntro(){
+  const p=buildPlan(),{start,end}=p.intro,all=allR(),nr=all.slice(start,end),known=all.slice(0,start),sofar=all.slice(0,end);
+  await csay('Nieuwe tekst','Nieuwe tekst: '+refSpoken(cur.ref)+(nr.length<SEG.length?'. Vandaag '+spLabel(nr):'')+'.');
+  if(known.length){await csay('Herhalen','Eerst herhalen wat je al kent. Vul telkens aan.');await carCue(known)}
+  await csay('Luister','Luister.');await carListen(nr);
+  await csay('Spreek na','Spreek nu na, deel voor deel.');await carEcho(nr);
+  await csay('Nog een keer','Nog een keer.');await carEcho(nr);
+  await csay('Vul aan','Vul nu zelf aan.');await carCue(sofar);
+  introDone(end);
+  await csay(end>=SEG.length?'Ingeprent · vak 1':'Morgen verder',end>=SEG.length?'Goed gedaan. Deze tekst gaat naar vak 1. Morgen volgt de eerste toets.':'Goed gedaan. Morgen ga je verder met de volgende delen.');
+}
+async function carReview(){
+  await csay(cur.ref,refSpoken(cur.ref)+'.');await carListen(allR());
+  await csay('Vul aan','Vul aan.');await carCue(allR());
+}
+function carItems(what){
+  if(what==='all'){const k=state.verses.filter(v=>v.box>0);return (k.length?k:state.verses).map(v=>v.id)}
+  return [...dueTests(),...newToday()].map(v=>v.id);
+}
+async function carRun(){
+  audReset();CAR.finished=false;const items=CAR.items;
+  try{
+    await csay('Automodus',`Automodus. ${CAR.what==='all'?'We herhalen '+items.length+(items.length===1?' tekst':' teksten')+'.':'Vandaag '+items.length+(items.length===1?' tekst':' teksten')+'.'}`);
+    for(CAR.idx=0;CAR.idx<items.length;CAR.idx++){
+      cur=state.verses.find(v=>v.id===items[CAR.idx]);if(!cur)continue;prep();
+      mode=CAR.what==='all'?'free':cur.box===0?'intro':cur.due<=today()?'test':'free';outcome=null;
+      cset({prog:`${CAR.idx+1} van ${items.length}`,ref:cur.ref,heard:''});
+      try{
+        if(CAR.what==='all')await carReview();
+        else if(cur.box===0)await carIntro();
+        else if(cur.due<=today())await carTest();
+      }catch(e){if(e===A_SKIP){AUD.skip=false;AUD.again=false;try{speechSynthesis.cancel()}catch(_){};continue}throw e}
+    }
+    CAR.finished=true;cset({prog:'',ref:'Klaar',heard:'',done:false,judge:false});renderCar();
+    await say(CAR.what==='all'?'Klaar met herhalen.':'Klaar. Je bent klaar voor vandaag.');
+  }catch(e){if(e!==A_STOP){console.error(e);CAR.finished=true;renderCar();cset({ref:'Gestopt',msg:'Er ging iets mis. Je voortgang tot nu toe is bewaard.'});say('Er ging iets mis. De automodus is gestopt.')}}
+  wakeLock(false);
+}
+function carEnd(){CAR.on=false;CAR.finished=false;audStop();wakeLock(false)}
+function renderCar(){
+  const S=state.settings;
+  if(!CAR.on){
+    const t=dueTests().length,n=newToday().length,known=state.verses.filter(v=>v.box>0).length;
+    app.innerHTML=`<h2>Automodus</h2>
+    <p class="note" style="max-width:62ch">Voor onderweg. De app leest voor en vraagt jou op te zeggen; met de microfoon controleert hij je tekst en zeg je “goed” of “fout”. Zet je telefoon vast in een houder, zet het geluid via de auto aan en start vóór je wegrijdt. Het scherm blijft aan.</p>
+    <form class="add" id="carf">
+      <fieldset><legend class="label">Wat wil je doen?</legend>
+        <label class="opt"><input type="radio" name="what" id="what-t" value="today" ${CAR.what!=='all'?'checked':''}> Programma van vandaag (${t} ${t===1?'toets':'toetsen'}, ${n} nieuw)</label>
+        <label class="opt"><input type="radio" name="what" id="what-a" value="all" ${CAR.what==='all'?'checked':''}> Alle teksten herhalen: luisteren en aanvullen (${(known||state.verses.length)===1?'1 tekst':(known||state.verses.length)+' teksten'}, telt niet mee voor de doos)</label>
+      </fieldset>
+      <label class="opt"><input type="checkbox" id="voice" ${CAR.voice&&SRC?'checked':''} ${SRC?'':'disabled'}> Microfoon gebruiken: opzeggen controleren en “goed”, “fout”, “klaar” zeggen</label>
+      ${SRC?'':'<p class="note">Spraakherkenning werkt niet in deze browser. Je bedient de automodus dan met de grote knoppen.</p>'}
+      <label class="label" for="echo2">Pauze om na te spreken of aan te vullen</label>
+      <select id="echo2">${[[0.7,'kort'],[1,'normaal'],[1.4,'lang'],[1.8,'heel lang']].map(([r,l])=>`<option value="${r}" ${S.echo==r?'selected':''}>${l}</option>`).join('')}</select>
+      <div class="formrow"><button class="primary big" type="submit" ${TTS.ok?'':'disabled'}>Start automodus</button></div>
+      ${TTS.ok?'':'<p class="note err">Voorlezen werkt niet in deze browser, daarom kan de automodus niet starten.</p>'}
+    </form>
+    <p class="note" style="max-width:62ch">Tijdens de automodus zijn er grote knoppen: <b>Herhaal</b> (dit deel opnieuw), <b>Pauze</b> en <b>Volgende</b> (naar de volgende tekst). Na een piep luistert de app: zeg dan de tekst op en sluit af met “klaar”, of zeg “goed” of “fout” als daarom gevraagd wordt.</p>`;
+    app.querySelectorAll('input[name=what]').forEach(r=>r.onchange=()=>{CAR.what=r.value});
+    const vc=document.getElementById('voice');if(vc)vc.onchange=()=>{CAR.voice=vc.checked};
+    document.getElementById('echo2').onchange=e=>{S.echo=+e.target.value;save()};
+    document.getElementById('carf').onsubmit=e=>{e.preventDefault();
+      CAR.items=carItems(CAR.what);if(!CAR.items.length){toast(CAR.what==='all'?'Nog geen teksten':'Vandaag niets te doen. Kies “Alle teksten herhalen”.');return}
+      CAR.voice=CAR.voice&&!!SRC;CAR.on=true;beep(520,60);wakeLock(true);renderCar();window.scrollTo(0,0);carRun()};
+    return;
+  }
+  app.innerHTML=`<div class="car">
+    <div class="carhead"><span>Automodus</span><span id="cProg">${CAR.finished?'':`${CAR.idx+1} van ${CAR.items.length}`}</span></div>
+    <div class="cref" id="cRef">${CAR.finished?'Klaar':esc(cur?cur.ref:'')}</div>
+    <div class="cmsg" id="cMsg">${CAR.finished?(CAR.what==='all'?'Klaar met herhalen.':'Je bent klaar voor vandaag.'):''}</div>
+    <div class="cheard" id="cHeard"></div>
+    ${CAR.finished?`<div class="cbtns one"><button class="cbig" id="cHome">Terug naar overzicht</button></div>`:`
+    <button class="cbig cdone" id="cDone" hidden>Klaar met opzeggen</button>
+    <div class="cjudge" id="cJudge" hidden><button class="cbig cbad" id="cBad">Fout</button><button class="cbig cgood" id="cGood">Goed</button></div>
+    <div class="cbtns"><button class="cbig" id="cAgain">Herhaal</button><button class="cbig" id="cPause">${AUD.paused?'Verder':'Pauze'}</button><button class="cbig" id="cNext">Volgende</button></div>
+    <button class="cstop" id="cStop">Stop automodus</button>`}
+  </div>`;
+  const $=id=>document.getElementById(id);
+  if($('cHome'))$('cHome').onclick=()=>{carEnd();go('home')};
+  if(CAR.finished)return;
+  $('cDone').onclick=()=>{if(AUD.rec)AUD.rec.stop();else if(CAR.btn)CAR.btn('done')};
+  $('cGood').onclick=()=>CAR.btn&&CAR.btn('good');
+  $('cBad').onclick=()=>CAR.btn&&CAR.btn('bad');
+  $('cAgain').onclick=()=>audAgain();
+  $('cPause').onclick=()=>{audPause();cset({msg:AUD.paused?'Gepauzeerd':''})};
+  $('cNext').onclick=()=>audSkip();
+  $('cStop').onclick=()=>{carEnd();go('home')};
+}
+
+/* Woord-voor-woord vergelijking (LCS) */
+function compare(orig,typed,at={},eq=null){
+  const a=orig.map(norm);
+  if(!a.some(x=>/^\d+$/.test(x)))typed=typed.filter(t=>!/^\d+$/.test(norm(t)));
+  const b=typed.map(norm),n=a.length,m=b.length;
+  const L=Array.from({length:n+1},()=>new Uint16Array(m+1));
+  const E=eq?(x,y)=>eq(a[x],b[y]):(x,y)=>a[x]===b[y];
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=E(i,j)?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  let i=0,j=0,out=[],ok=0,extra=0,miss=[];
+  while(i<n||j<m){
+    if(i<n&&j<m&&E(i,j)){out.push(vnum(at,i)+`<span class="w done">${esc(orig[i])}</span>`);ok++;i++;j++}
+    else if(j<m&&(i>=n||L[i][j+1]>=L[i+1][j])){if(b[j]){out.push(`<span class="w extra">${esc(typed[j])}</span>`);extra++}j++}
+    else{out.push(vnum(at,i)+`<span class="w miss">${esc(orig[i])}</span>`);miss.push(i);i++}
+  }
+  return {html:out.join(' '),ok,extra,miss,pct:Math.round(ok/n*100)};
 }
 go('home');
 </script>

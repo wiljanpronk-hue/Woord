@@ -1,6 +1,6 @@
 // Woord in het Hart – service worker: zorgt dat de app offline werkt.
 // Verhoog VERSIE als je de app bijwerkt, dan halen telefoons de nieuwe versie op.
-const VERSIE = 'wih-v1';
+const VERSIE = 'wih-v6';
 const BESTANDEN = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
 const LETTERS = 'wih-fonts';
 
