@@ -463,9 +463,9 @@ function renderData(){
     <label class="label" for="perDay">Nieuwe teksten per dag</label>
     ${numField('perDay',S.perDay,[0,1,2,3,4,5,6,7,8,9,10,12,15,20,25,30,40,50],'0 = pauze: er komen geen nieuwe teksten bij')}
     <p class="note">Liever elke dag een paar teksten goed inprenten dan veel tegelijk. De rest wacht in “Nieuw”.</p>
-    <label class="label" for="segPerDay">Lange gedeelten: delen per dag inprenten</label>
-    ${numField('segPerDay',S.segPerDay,[0,1,2,3,4,5,6,7,8,9,10,12,15,20,25,30,40,50],'0 = alles in één keer, hoe lang het gedeelte ook is')}
-    <p class="note">Een gedeelte wordt opgedeeld per vers (lange verzen bij de leestekens). Is het langer, dan prent je het in porties in over meerdere dagen; elke dag herhaal je eerst wat je al kent.</p>
+    <label class="label" for="segPerDay">Lange gedeelten: verzen per dag inprenten</label>
+    ${numField('segPerDay',S.segPerDay,[0,1,2,3,4,5,6,7,8,9,10,12,15,20,25,30,40,50],'0 = het hele gedeelte in één keer, hoe lang het ook is')}
+    <p class="note">Een gedeelte wordt opgedeeld per vers; een vers blijft altijd heel, ook als het lang is. Is het gedeelte langer dan dit aantal verzen, dan prent je het in porties in over meerdere dagen; elke dag herhaal je eerst wat je al kent. Alleen een zelf ingetypte tekst zonder versnummer wordt bij de leestekens opgedeeld.</p>
     <label class="label" for="rate2">Voorleessnelheid</label>
     <select id="rate2">${[[0.7,'langzaam'],[0.85,'rustig'],[1,'normaal']].map(([r,l])=>`<option value="${r}" ${S.rate==r?'selected':''}>${l}</option>`).join('')}</select>
     <label class="label" for="echo3">Pauze bij naspreken en aanvullen</label>
@@ -519,7 +519,7 @@ const KINDS={
 /* Na een foutloze toets: wat er nog volgt, per vak waarin de tekst stond */
 const AFTER={1:[['read',2],['cue',1]],2:[['listen',1],['read',1]],3:[['read',1]]};
 const PROGRAM=()=>[
- ['Nieuw','Luisteren · naspreken · 3× hardop lezen · beginletters · gaten · opzeggen met weinig hulp. '+(state.settings.segPerDay?'Lange gedeelten in porties van '+state.settings.segPerDay+(state.settings.segPerDay===1?' deel':' delen')+' per dag.':'Lange gedeelten in één keer.')],
+ ['Nieuw','Luisteren · naspreken · 3× hardop lezen · beginletters · gaten · opzeggen met weinig hulp. '+(state.settings.segPerDay?'Lange gedeelten in porties van '+state.settings.segPerDay+(state.settings.segPerDay===1?' vers':' verzen')+' per dag; verzen blijven heel.':'Lange gedeelten in één keer.')],
  ['Vak 1','Toets, daarna 2× hardop lezen en 1× aanvullen.'],
  ['Vak 2','Toets, daarna 1× luisteren en 1× hardop lezen.'],
  ['Vak 3','Toets, daarna 1× hardop lezen.'],
@@ -533,7 +533,20 @@ const allR=()=>SEG.map((_,i)=>i);
 const rangeOf=st=>st.range||allR();
 
 /* Delen: per vers; lange verzen (of een lange losse tekst) worden bij leestekens gesplitst */
+/* Delen: altijd per heel vers. Alleen een zelf ingevoerde tekst zonder vindplaats met vers wordt bij de leestekens gesplitst. */
 function segmentsOf(v){
+  const Wd=words(v.text), mk=(marksOf(v)||[]).filter(m=>m[0]<Wd.length);
+  if(mk.length>1)return mk.map(([w,n],i)=>({a:w,b:i+1<mk.length?mk[i+1][0]:Wd.length,lab:'vers '+n}));
+  if(/:\s*\d+(\s*[-–]\s*\d+)?\s*$/.test(v.ref))return [{a:0,b:Wd.length,lab:'tekst'}];
+  const out=[];let s=0;
+  for(let i=0;i<Wd.length;i++){const len=i-s+1,endP=/[.;:?!]$/.test(Wd[i])||(/,$/.test(Wd[i])&&len>=18);
+    if((endP&&len>=8&&Wd.length-i-1>=6)||len>=28){out.push({a:s,b:i+1});s=i+1}}
+  if(s<Wd.length){if(out.length&&Wd.length-s<6)out[out.length-1].b=Wd.length;else out.push({a:s,b:Wd.length})}
+  out.forEach((g,i)=>g.lab=out.length>1?'deel '+(i+1):'tekst');
+  return out;
+}
+/* Oude indeling (lange verzen gesplitst), alleen nodig om voortgang van eerder begonnen gedeelten om te rekenen */
+function segmentsOld(v){
   const Wd=words(v.text), mk=(marksOf(v)||[]).filter(m=>m[0]<Wd.length), base=[], out=[];
   if(mk.length>1)mk.forEach(([w,n],i)=>base.push([w,i+1<mk.length?mk[i+1][0]:Wd.length,'vers '+n]));
   else base.push([0,Wd.length,'']);
@@ -548,6 +561,7 @@ function segmentsOf(v){
   out.forEach((g,i)=>{if(!g.lab)g.lab=out.length>1?'deel '+(i+1):'tekst'});
   return out;
 }
+const unitW=()=>SEG.length&&SEG[0].lab.startsWith('vers')?'verzen':'delen';
 const segText=g=>W.slice(SEG[g].a,SEG[g].b).join(' ');
 const rangeLabel=r=>{if(r.length===SEG.length)return 'de hele tekst';if(r.length===1)return SEG[r[0]].lab;
   if(r.every((g,i)=>!i||g===r[i-1]+1))return SEG[r[0]].lab+' t/m '+SEG[r[r.length-1]].lab;
@@ -574,7 +588,10 @@ function hlSeg(){document.querySelectorAll('.seg[data-g]').forEach(p=>p.classLis
   const r=document.getElementById('run');if(r)r.textContent=AUD.running?'■ Stop':'▶ Start'}
 
 function startNext(){const id=queue.shift();if(!id){toast('Klaar voor vandaag');go('home');return}openPractice(id)}
-function prep(){W=words(cur.text);AT={};(marksOf(cur)||[]).forEach(([w,n])=>AT[w]=n);SEG=segmentsOf(cur)}
+function prep(){W=words(cur.text);AT={};const mk=marksOf(cur);(mk||[]).forEach(([w,n])=>AT[w]=n);SEG=segmentsOf(cur);
+  if(cur.segv!==2&&mk!==null){
+    if(cur.intro){const old=segmentsOld(cur),wEnd=old[Math.min(cur.intro,old.length)-1].b,n=SEG.filter(g=>g.b<=wEnd).length;if(n)cur.intro=n;else delete cur.intro}
+    cur.weak=[];cur.segv=2;save()}}
 function openPractice(id){stopTTS();cur=state.verses.find(v=>v.id===id);if(!cur)return startNext();
   prep();mode=cur.box===0?'intro':cur.due<=today()?'test':'free';outcome=null;plan=buildPlan();resetStep();view='practice';
   document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-current','false'));render();window.scrollTo(0,0)}
@@ -618,7 +635,7 @@ function introDone(end){todayLog().intro++;cur.introDay=today();
   if(end>=SEG.length){cur.box=1;cur.due=addDays(today(),1);delete cur.intro}else cur.intro=end;save()}
 function finishIntro(){
   const {end}=plan.intro, r=cur.ref;introDone(end);startNext();
-  toast(end>=SEG.length?r+' staat in vak 1 · morgen de eerste toets':r+': '+end+' van '+SEG.length+' delen ingeprent · morgen verder')
+  toast(end>=SEG.length?r+' staat in vak 1 · morgen de eerste toets':r+': '+end+' van '+SEG.length+' '+unitW()+' ingeprent · morgen verder')
 }
 
 function textHTML(rng,wf){return rng.map(g=>{const s=SEG[g];let h='';
@@ -634,7 +651,7 @@ function renderPractice(){
   const up=Math.min(cur.box+1,7);
   let h=`<div class="controls" style="margin-top:14px"><button class="ghost" id="back">← Overzicht</button>${queue.length?`<span class="stat">nog ${queue.length} na deze</span>`:''}</div>`;
   if(mode==='intro'){const {start,end}=plan.intro;
-    h+=`<div class="mode">${chip(0)}<span>Inprenten${SEG.length>1?`: ${rangeLabel(allR().slice(start,end))} (${end-start} van ${SEG.length} delen${start?', '+start+' al eerder':''})`:''}. ${end>=SEG.length?'Na deze stappen gaat de tekst naar vak 1; morgen volgt de eerste toets.':'Morgen ga je verder met de volgende delen.'}</span></div>`}
+    h+=`<div class="mode">${chip(0)}<span>Inprenten${SEG.length>1?`: ${rangeLabel(allR().slice(start,end))} (${end-start} van ${SEG.length} ${unitW()}${start?', '+start+' al eerder':''})`:''}. ${end>=SEG.length?'Na deze stappen gaat de tekst naar vak 1; morgen volgt de eerste toets.':'Morgen ga je verder met de volgende '+unitW()+'.'}</span></div>`}
   if(mode==='test'&&!outcome){const fb=failBox(cur.box);
     h+=`<div class="mode"><span class="chip ${cur.box===7?'lang':''}">Toets · vak ${cur.box}</span><span>Foutloos: ${cur.box===7?'blijft in vak 7':'naar vak '+up}, volgende toets over ${BOX_DAYS[up]} ${BOX_DAYS[up]===1?'dag':'dagen'}. Fout: ${fb===cur.box?'blijft in vak '+fb:'naar vak '+fb}, morgen opnieuw.</span></div>`}
   if(mode==='free')h+=`<div class="mode">${chip(cur.box)}<span>Vrij oefenen. Dit telt niet mee voor de doos. De volgende toets is ${relDay(cur.due)} (${fmtDate(cur.due)}).</span></div>`;
